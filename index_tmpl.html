@@ -1,0 +1,527 @@
+<meta charset="utf-8">
+<title>Iceland South Coast — 5-Day Trip Companion</title>
+<style>
+/* ===== embedded fonts ===== */
+__FONTS__
+
+/* ===== tokens ===== */
+:root{
+  --paper:#EDF2F4; --card:#FFFFFF; --card2:#F5F8FA;
+  --ink:#141C24; --ink2:#3C4A57; --ink3:#6A7B8A;
+  --line:#DBE4E9; --line2:#C7D4DC;
+  --accent:#15719B; --accent-2:#0E5877; --accent-soft:#E1EEF4;
+  --amber:#C77A16; --amber-soft:#F6E7CE;
+  --shadow:0 1px 2px rgba(16,40,56,.06),0 8px 24px rgba(16,40,56,.08);
+  --shadow-lg:0 2px 6px rgba(16,40,56,.10),0 20px 48px rgba(16,40,56,.16);
+  --d1:#15719B; --d2:#1E8E80; --d3:#7C5CC4; --d4:#C77A16; --d5:#59708A;
+  --radius:16px;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --paper:#0D1319; --card:#161F28; --card2:#1C2732;
+    --ink:#EAF1F5; --ink2:#B4C4CF; --ink3:#7E93A1;
+    --line:#26343F; --line2:#33454F;
+    --accent:#4FB0DA; --accent-2:#7FCBEC; --accent-soft:#16303D;
+    --amber:#E6A542; --amber-soft:#3A2E17;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.5);
+    --shadow-lg:0 2px 6px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.6);
+    --d1:#4FB0DA; --d2:#37C0AE; --d3:#A487E8; --d4:#E6A542; --d5:#8AA4BB;
+  }
+}
+:root[data-theme="light"]{
+  --paper:#EDF2F4; --card:#FFFFFF; --card2:#F5F8FA; --ink:#141C24; --ink2:#3C4A57; --ink3:#6A7B8A;
+  --line:#DBE4E9; --line2:#C7D4DC; --accent:#15719B; --accent-2:#0E5877; --accent-soft:#E1EEF4;
+  --amber:#C77A16; --amber-soft:#F6E7CE;
+  --shadow:0 1px 2px rgba(16,40,56,.06),0 8px 24px rgba(16,40,56,.08);
+  --shadow-lg:0 2px 6px rgba(16,40,56,.10),0 20px 48px rgba(16,40,56,.16);
+  --d1:#15719B; --d2:#1E8E80; --d3:#7C5CC4; --d4:#C77A16; --d5:#59708A;
+}
+:root[data-theme="dark"]{
+  --paper:#0D1319; --card:#161F28; --card2:#1C2732; --ink:#EAF1F5; --ink2:#B4C4CF; --ink3:#7E93A1;
+  --line:#26343F; --line2:#33454F; --accent:#4FB0DA; --accent-2:#7FCBEC; --accent-soft:#16303D;
+  --amber:#E6A542; --amber-soft:#3A2E17;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.5);
+  --shadow-lg:0 2px 6px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.6);
+  --d1:#4FB0DA; --d2:#37C0AE; --d3:#A487E8; --d4:#E6A542; --d5:#8AA4BB;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(1200px 600px at 80% -10%,var(--accent-soft),transparent 60%);}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+h1,h2,h3{margin:0;text-wrap:balance}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ===== hero ===== */
+header.hero{padding:44px 0 26px;position:relative}
+.kicker{font:600 12.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+  display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+h1.title{font-family:var(--serif);font-weight:400;font-size:clamp(38px,6.4vw,74px);line-height:.98;
+  letter-spacing:-.01em;margin:14px 0 8px}
+h1.title em{font-style:italic;color:var(--accent)}
+.sub{color:var(--ink2);font-size:clamp(15px,2vw,18.5px);max-width:60ch}
+.metarow{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;
+  font-size:13px;color:var(--ink2);box-shadow:var(--shadow);display:flex;gap:7px;align-items:center}
+.stat b{color:var(--ink);font-weight:700}
+.themebtn{position:absolute;top:20px;right:20px;background:var(--card);border:1px solid var(--line);
+  color:var(--ink2);border-radius:999px;width:40px;height:40px;cursor:pointer;font-size:17px;box-shadow:var(--shadow)}
+.themebtn:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ===== insight (gap analysis) ===== */
+.section-h{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.01em;margin-bottom:4px}
+.section-lede{color:var(--ink2);max-width:64ch;margin-bottom:20px}
+.insights{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:14px}
+.ins{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 16px 15px;box-shadow:var(--shadow);
+  border-left:3px solid var(--accent)}
+.ins h3{font-size:15px;font-weight:700;margin-bottom:5px;display:flex;gap:8px;align-items:baseline}
+.ins .tag{font:700 10px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);
+  background:var(--accent-soft);padding:4px 7px;border-radius:6px;white-space:nowrap}
+.ins p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.ins.amber{border-left-color:var(--amber)} .ins.amber .tag{color:var(--amber);background:var(--amber-soft)}
+.ins.warn{border-left-color:#d1495b} .ins.warn .tag{color:#fff;background:#d1495b}
+
+/* ===== day tabs ===== */
+.daybar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 86%,transparent);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line);margin-top:34px}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:11px 0;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 15px;
+  cursor:pointer;color:var(--ink2);font-size:13.5px;font-weight:600;display:flex;flex-direction:column;gap:1px;min-width:96px;
+  transition:transform .12s,border-color .12s}
+.tab .dn{font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.tab .dn::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--dc)}
+.tab .dd{color:var(--ink);font-size:13px}
+.tab .dt{color:var(--ink3);font-size:11.5px;font-weight:500}
+.tab:hover{transform:translateY(-1px)}
+.tab.on{border-color:var(--dc);box-shadow:0 0 0 1px var(--dc),var(--shadow);background:var(--card)}
+.tab.on .dn{color:var(--dc)}
+
+/* ===== filter bar ===== */
+.filters{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:16px 0 4px}
+.filters .lab{font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-right:4px}
+.fchip{border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:999px;padding:6px 12px;
+  font-size:12.5px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px}
+.fchip .dot{width:8px;height:8px;border-radius:50%}
+.fchip:hover{border-color:var(--ink3)}
+.fchip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.fchip.on .dot{background:#fff!important}
+
+/* ===== main layout ===== */
+.layout{display:grid;grid-template-columns:1fr 380px;gap:26px;align-items:start;padding:6px 0 60px}
+@media (max-width:920px){.layout{grid-template-columns:1fr}}
+
+/* timeline */
+.dayhead{padding:22px 0 6px}
+.dayhead .dbadge{font:700 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--dc);
+  display:flex;align-items:center;gap:8px}
+.dayhead .dbadge::before{content:"";width:22px;height:2px;background:var(--dc)}
+.dayhead h2{font-family:var(--serif);font-weight:400;font-size:clamp(27px,4vw,40px);letter-spacing:-.01em;margin:8px 0 4px}
+.dayhead .dsub{color:var(--ink2);max-width:60ch}
+.dayfacts{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.fact{font-size:12px;color:var(--ink2);background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:5px 10px}
+.fact b{color:var(--ink)}
+
+.tl{position:relative;margin-top:8px;padding-left:0}
+.leg{display:flex;align-items:center;gap:12px;padding:9px 0 9px 4px;color:var(--ink2);font-size:13px}
+.leg .ln{flex:0 0 auto;width:34px;display:flex;justify-content:center}
+.leg .ln i{display:block;width:2px;height:100%;min-height:26px;background:repeating-linear-gradient(var(--line2) 0 5px,transparent 5px 10px)}
+.leg .lc{flex:1;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;padding:8px 12px;border:1px dashed var(--line2);border-radius:10px;background:var(--card2)}
+.leg .lc b{color:var(--ink);font-weight:600}
+.leg .mode{font-size:15px}
+.leg .lc .via{color:var(--ink3);font-size:12.5px;flex-basis:100%}
+
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);margin:12px 0;overflow:hidden;scroll-margin-top:150px;transition:box-shadow .15s,border-color .15s,opacity .2s}
+.card.dim{opacity:.32;filter:saturate(.6)}
+.card.active{border-color:var(--dc);box-shadow:0 0 0 2px var(--dc),var(--shadow-lg)}
+.card .grid{display:grid;grid-template-columns:200px 1fr}
+@media (max-width:560px){.card .grid{grid-template-columns:1fr}}
+.card .ph{position:relative;background:var(--card2);min-height:150px}
+.card .ph img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.card .ph .tstamp{position:absolute;top:10px;left:10px;background:rgba(8,16,22,.72);color:#fff;
+  font:700 12px/1 var(--sans);letter-spacing:.02em;padding:6px 9px;border-radius:8px;backdrop-filter:blur(3px)}
+.card .ph .repcap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(8,16,22,.6));
+  color:#dfe8ee;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;padding:14px 8px 5px;font-weight:600}
+.card .bd{padding:15px 16px 16px;min-width:0}
+.card .toprow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.ttl{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.08;letter-spacing:-.01em}
+.typelab{font:700 10px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--dc);margin-bottom:6px;display:flex;gap:7px;align-items:center}
+.dur{font-size:11.5px;color:var(--ink3);font-weight:500;text-transform:none;letter-spacing:0}
+.cost{flex:0 0 auto;font:700 12.5px/1.2 var(--sans);color:var(--ink);background:var(--card2);border:1px solid var(--line2);
+  padding:7px 10px;border-radius:9px;text-align:right;white-space:nowrap;max-width:150px}
+.cost.free{color:#1f8a5b;border-color:#bfe3d0;background:#e9f7ef}
+@media (prefers-color-scheme:dark){.cost.free{color:#5fd39a;background:#12271c;border-color:#1f4633}}
+:root[data-theme="dark"] .cost.free{color:#5fd39a;background:#12271c;border-color:#1f4633}
+:root[data-theme="light"] .cost.free{color:#1f8a5b;border-color:#bfe3d0;background:#e9f7ef}
+.desc{color:var(--ink2);font-size:14px;margin:10px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
+.chip{font:600 11.5px/1 var(--sans);padding:5px 9px;border-radius:7px;display:inline-flex;align-items:center;gap:5px;
+  border:1px solid transparent}
+.chip .cd{width:7px;height:7px;border-radius:50%}
+.tip{margin-top:11px;background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);
+  border-radius:10px;padding:9px 11px;font-size:12.8px;color:var(--ink);display:flex;gap:8px}
+.tip.warn{background:#fdecef;border-color:#f0b8c2;color:#7a1226}
+@media (prefers-color-scheme:dark){.tip.warn{background:#2c1219;border-color:#5e2330;color:#f6b5c0}}
+:root[data-theme="dark"] .tip.warn{background:#2c1219;border-color:#5e2330;color:#f6b5c0}
+:root[data-theme="light"] .tip.warn{background:#fdecef;border-color:#f0b8c2;color:#7a1226}
+.tip b{font-weight:700}
+.tip .ic{flex:0 0 auto;font-weight:700}
+.opts{margin-top:12px;border-top:1px solid var(--line);padding-top:11px;display:flex;flex-direction:column;gap:9px}
+.opts .oh{font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.opt{display:flex;gap:10px;align-items:flex-start}
+.opt .on{flex:1;min-width:0}
+.opt .onm{font-weight:700;font-size:13.5px}
+.opt .obl{color:var(--ink2);font-size:12.5px}
+.opt .oc{flex:0 0 auto;font:700 11.5px/1 var(--sans);color:var(--accent);white-space:nowrap;padding-top:2px}
+.opt .pick{font:700 9px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:#fff;
+  padding:3px 6px;border-radius:5px;margin-left:7px;vertical-align:middle}
+.card.bookedcard{border-color:#bfe3d0}
+@media (prefers-color-scheme:dark){.card.bookedcard{border-color:#245039}}
+:root[data-theme="dark"] .card.bookedcard{border-color:#245039}
+:root[data-theme="light"] .card.bookedcard{border-color:#bfe3d0}
+.booktag{position:absolute;top:10px;right:10px;background:#1f8a5b;color:#fff;font:700 11px/1 var(--sans);letter-spacing:.03em;padding:6px 9px;border-radius:8px;box-shadow:0 2px 8px rgba(8,30,20,.35)}
+.bk{margin-top:12px;border-top:1px solid var(--line);padding-top:11px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline}
+.bk .bkh{grid-column:1/-1;font:700 10.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#1f8a5b;margin-bottom:1px}
+@media (prefers-color-scheme:dark){.bk .bkh{color:#5fd39a}}
+:root[data-theme="dark"] .bk .bkh{color:#5fd39a}
+:root[data-theme="light"] .bk .bkh{color:#1f8a5b}
+.bkk{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;font-weight:700;white-space:nowrap}
+.bkv{font-size:13px;color:var(--ink);font-weight:500}
+.swap{margin-top:12px;background:var(--card2);border:1px dashed var(--line2);border-radius:10px;padding:10px 12px}
+.swap .sh{font:700 10.5px/1 var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.swap .sh::before{content:"⇄";font-size:13px}
+.swap p{margin:0;font-size:12.8px;color:var(--ink2)}
+
+/* ===== map rail ===== */
+.rail{position:sticky;top:74px}
+@media (max-width:920px){.rail{position:static}}
+.mapcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-lg);
+  overflow:hidden}
+.maphd{padding:13px 15px 10px;border-bottom:1px solid var(--line)}
+.maphd h3{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.maphd p{margin:3px 0 0;font-size:12px;color:var(--ink3)}
+.mapwrap{position:relative;background:linear-gradient(180deg,var(--card2),var(--card))}
+svg.map{display:block;width:100%;height:auto}
+.isle{fill:color-mix(in srgb,var(--accent) 12%,var(--card));stroke:var(--line2);stroke-width:.8}
+.route{fill:none;stroke:var(--line2);stroke-width:1.4;stroke-linecap:round;stroke-dasharray:2 3;opacity:.7}
+.route.act{stroke:var(--dc);stroke-width:2.4;stroke-dasharray:none;opacity:1}
+.mk{cursor:pointer}
+.mk circle.hit{fill:transparent}
+.mk circle.pin{stroke:var(--card);stroke-width:1.6;transition:r .12s}
+.mk.on circle.pin{stroke-width:2}
+.mk .lbl{font:700 9.5px/1 var(--sans);fill:var(--ink);paint-order:stroke;stroke:var(--card);stroke-width:3px;opacity:0;pointer-events:none}
+.mk.on .lbl,.mk:hover .lbl{opacity:1}
+.legend{display:flex;flex-wrap:wrap;gap:9px;padding:11px 15px 13px;border-top:1px solid var(--line)}
+.legend span{font-size:11.5px;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.legend span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--lc)}
+.railnote{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 15px;margin-top:14px;font-size:12.8px;color:var(--ink2)}
+.railnote h3{font-size:13px;font-weight:700;margin-bottom:7px;color:var(--ink)}
+.railnote ul{margin:0;padding-left:16px} .railnote li{margin:4px 0}
+
+/* ===== budget ===== */
+.budget{margin-top:40px}
+.btable{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);font-size:13.5px}
+.btable th,.btable td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line)}
+.btable th{font:700 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);background:var(--card2)}
+.btable td.n{text-align:right;font-variant-numeric:tabular-nums}
+.btable tr:last-child td{border-bottom:none}
+.btable tr.tot td{font-weight:700;color:var(--ink);background:var(--card2)}
+.bnote{font-size:12px;color:var(--ink3);margin-top:9px}
+
+footer{border-top:1px solid var(--line);margin-top:50px;padding:26px 0 60px;color:var(--ink3);font-size:12.5px}
+footer b{color:var(--ink2)}
+.reveal{opacity:0;transform:translateY(10px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .5s,transform .5s}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto!important}}
+</style>
+
+<button class="themebtn" id="themebtn" title="Toggle light / dark" aria-label="Toggle theme">◐</button>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kicker">Iceland · Golden Circle & South Coast</div>
+    <h1 class="title">Five days of <em>waterfalls, glaciers &amp; puffins</em></h1>
+    <p class="sub">A re-optimized, budget-first plan for two — vegetarian &amp; chicken-friendly, no bar tabs, and timed around the midnight sun so you hit each place at its best (and beat the tour buses). Mon Jul 27 → Fri Jul 31, 2026.</p>
+    <div class="metarow" id="metarow"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="reveal">
+    <h2 class="section-h">What I changed &amp; why</h2>
+    <p class="section-lede">Your itinerary was a strong skeleton. Here are the fixes that matter most before you drive off — the rest is baked into each day below.</p>
+    <div class="insights" id="insights"></div>
+  </section>
+</main>
+
+<div class="daybar">
+  <div class="wrap"><div class="tabs" id="tabs"></div></div>
+</div>
+
+<main class="wrap">
+  <div class="filters" id="filters"><span class="lab">Filter</span></div>
+  <div class="layout">
+    <div id="timeline"></div>
+    <aside class="rail">
+      <div class="mapcard">
+        <div class="maphd">
+          <h3>📍 Where you'll be — Day <span id="mapday">1</span></h3>
+          <p id="mapsub">Tap a pin or a stop to link them. Route shown west → east.</p>
+        </div>
+        <div class="mapwrap" id="mapwrap"></div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="railnote">
+        <h3>☀️ Midnight-sun playbook</h3>
+        <ul>
+          <li><b>Marquee stops:</b> before 9am or after 6pm to dodge tour buses — light is gorgeous till ~11pm.</li>
+          <li><b>Puffins (Dyrhólaey):</b> 6–10pm or 7–10am — they're out fishing midday.</li>
+          <li><b>Reynisfjara:</b> only near <b>low tide</b>, stay 30m back — sneaker waves are deadly.</li>
+          <li><b>Save money:</b> stock Bónus/Krónan; skip boat tours &amp; the Blue Lagoon — the free views win.</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <section class="budget reveal">
+    <h2 class="section-h">What it should cost</h2>
+    <p class="section-lede">Rough estimate for two, budget-conscious, no alcohol. Your Blue rental car is already booked, so it's excluded. ISK at ~138 to the dollar (summer 2026).</p>
+    <div style="overflow-x:auto">
+      <table class="btable" id="btable"></table>
+    </div>
+    <p class="bnote">Lodging rows now reflect your <b>booked hotels</b> — Seljavellir (€322) and Reykjavik Marina ($316) are your actual paid totals; Helja and Vík Cottages are estimated (their prices weren't on the receipts). Food assumes self-catered breakfasts + one sit-down meal a day; fuel ≈ 730 mi in a compact car.</p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Photos</b> are from Wikimedia Commons (freely licensed) and are downscaled for speed; restaurant/hotel cards use a representative image of the area or a signature dish where a venue photo wasn't freely available. <b>Hotels</b> listed are currently-operating, well-rated <b>non-hostel</b> properties (private rooms + private bath) with July price ranges — but live per-date availability couldn't be pulled programmatically, so book each night with a free-cancellation rate and reconfirm. <b>Prices, hours &amp; tour slots change</b> — also reconfirm the glacier hike, Friðheimar lunch, and dinner reservations before you go. Built as a personal trip companion, July 2026.</p>
+  </div>
+</footer>
+
+<script>
+const MAP = __MAP__;
+const IMG = __IMAGES__;
+
+/* chip dictionary: kind -> [label, color] */
+const CK = {
+  free:['Free','#1f8a5b'], cheap:['Cheap','#C77A16'], veggie:['Veggie','#2f9e44'],
+  chicken:['Chicken OK','#E8823A'], puffin:['Puffins','#E4572E'], waterfall:['Waterfall','#1f8fb0'],
+  nature:['Nature','#2f9e44'], photo:['Photo-op','#7C5CC4'], hike:['Hike','#5b8c3e'],
+  beach:['Black sand','#5a6b78'], lava:['Lava','#B5462E'], glacier:['Glacier','#2e93b8'],
+  tide:['Check tide','#0E7C86'], booked:['Book ahead','#7C5CC4'], quirky:['Quirky','#D6549A'],
+  budget:['Budget tip','#C77A16'], crowd:['Beat crowds','#5a6b78'], optional:['Optional','#8494a0'],
+  cave:['Cave','#5b8c3e'], view:['Big view','#1f8fb0'], confirmed:['✓ Booked','#1f8a5b']
+};
+/* filterable kinds shown in the bar */
+const FILTERS=['free','cheap','veggie','chicken','puffin','waterfall','hike','quirky'];
+
+const TYPEC={arrival:'var(--dc)',drive:'var(--dc)',sight:'var(--dc)',hike:'var(--dc)',glacier:'var(--dc)',
+  beach:'var(--dc)',eat:'var(--dc)',hotel:'var(--dc)',grocery:'var(--dc)',town:'var(--dc)',depart:'var(--dc)',optional:'var(--dc)'};
+const TYPEL={arrival:'Arrive',sight:'See',hike:'Hike',glacier:'Glacier',beach:'Beach',eat:'Eat',
+  hotel:'Sleep',grocery:'Provisions',town:'Explore',depart:'Depart',optional:'Optional detour'};
+
+const DATA = __DATA__;
+
+/* ---------- render helpers ---------- */
+function chip(k){const c=CK[k]||[k,'#888'];return `<span class="chip" data-k="${k}" style="background:${c[1]}1a;border-color:${c[1]}44;color:var(--ink)"><span class="cd" style="background:${c[1]}"></span>${c[0]}</span>`;}
+function costCls(c){return /free/i.test(c)&&!/[0-9]/.test(c)?'cost free':'cost';}
+
+function legHTML(s){
+  return `<div class="leg"><div class="ln"><i></i></div>
+    <div class="lc"><span class="mode">${s.mode||'🚗'}</span> <b>${s.name}</b>
+    <span>${s.mi?s.mi+' · ':''}${s.time||''}</span>
+    ${s.via?`<span class="via">↳ ${s.via}</span>`:''}</div></div>`;
+}
+function optHTML(o){
+  return `<div class="opt"><div class="on"><div class="onm">${o.n}${o.pick?'<span class="pick">Top pick</span>':''}</div>
+    <div class="obl">${o.b}</div></div><div class="oc">${o.c||''}</div></div>`;
+}
+function cardHTML(s,di,idx){
+  const id=`s-${di}-${idx}`;
+  const booktag=s.booked?'<div class="booktag">✓ Booked</div>':'';
+  const img=s.k&&IMG[s.k]?`<div class="ph"><img loading="lazy" src="${IMG[s.k]}" alt="${s.name}"><div class="tstamp tnum">${s.t||''}</div>${booktag}${s.rep?`<div class="repcap">${s.rep}</div>`:''}</div>`:'';
+  const chips=(s.chips||[]).map(chip).join('');
+  const tip=s.tip?`<div class="tip ${s.warn?'warn':''}"><span class="ic">${s.warn?'⚠':'✦'}</span><div>${s.tip}</div></div>`:'';
+  const bk=s.bk?`<div class="bk"><div class="bkh">Your booking</div>${Object.entries(s.bk).map(([k,v])=>`<div class="bkk">${k}</div><div class="bkv">${v}</div>`).join('')}</div>`:'';
+  const opts=s.opts?`<div class="opts"><div class="oh">${s.oh||'Options'}</div>${s.opts.map(optHTML).join('')}</div>`:'';
+  const swap=s.swap?`<div class="swap"><div class="sh">Bonus swap</div><p>${s.swap}</p></div>`:'';
+  const dat=(s.lon!=null)?`data-lon="${s.lon}" data-lat="${s.lat}"`:'';
+  return `<article class="card reveal ${s.booked?'bookedcard':''}" id="${id}" data-kinds="${(s.chips||[]).join(' ')}" ${dat}>
+    <div class="grid">${img}<div class="bd">
+      <div class="typelab">${TYPEL[s.type]||''}${s.dur?`<span class="dur">· ${s.dur}</span>`:''}</div>
+      <div class="toprow"><div class="ttl">${s.name}</div>${s.cost?`<div class="${costCls(s.cost)}">${s.cost}</div>`:''}</div>
+      ${s.desc?`<p class="desc">${s.desc}</p>`:''}
+      ${chips?`<div class="chips">${chips}</div>`:''}
+      ${tip}${bk}${opts}${swap}
+    </div></div></article>`;
+}
+
+/* ---------- state ---------- */
+let curDay=0; let activeFilters=new Set();
+
+function renderMeta(){
+  const m=[['5','days · 4 nights'],['~730 mi','driving'],['~19 hrs','daylight/day'],['5+','waterfalls'],['2','glaciers'],['$0','on booze']];
+  document.getElementById('metarow').innerHTML=m.map(x=>`<span class="stat"><b>${x[0]}</b> ${x[1]}</span>`).join('');
+}
+function renderInsights(){
+  const ins=[
+    ['fixed','Sleep Höfn, then Vík','With Vík booked out on the 28th, I flipped the loop: you sleep in <b>Höfn on the 28th</b> and <b>Vík on the 29th</b>. Bonus payoff — Diamond Beach lands in glowing <b>morning</b> light, Vestrahorn is a golden-hour hop from your Höfn bed, and Day 4 back to Reykjavík drops from ~5 hrs to ~2½.'],
+    ['fixed','The sun barely sets','In late July you get ~19 hrs of light (up ~3:55am, down ~10:45pm). I re-timed the marquee stops to early-morning or evening so you skip the tour-bus crush — the light stays great long past "golden hour."'],
+    ['amber','Lunch gaps, solved','Day 1 had no real lunch until ~3pm. I dropped in <b>Friðheimar</b> — a geothermal tomato-greenhouse with unlimited soup + bread (vegetarian heaven). Days 2–3 anchor lunch at Skógar/Skaftafell before the hikes.'],
+    ['fixed','Brúarfoss → Kerið','Brúarfoss on arrival day means a 45–60 min hike after a red-eye. I swapped it for <b>Kerið crater</b> (5-min walk, 400 ISK) right on the road south — Brúarfoss stays as a bonus if you’re energized.'],
+    ['fixed','Don’t miss Gljúfrabúi','200m from Seljalandsfoss hides a waterfall <b>inside a canyon</b> that most people walk past. Free, quirky, and your wife will love it. Added to Day 2.'],
+    ['warn','Reynisfjara can kill','Sneaker waves have killed tourists here. I timed it for the evening near <b>low tide</b> and flagged the 30m rule. Non-negotiable: never turn your back to the sea.'],
+    ['amber','Eat cheap, skip the boat','Bónus/Krónan groceries for breakfasts &amp; picnics; the Jökulsárlón boat tour (~$95 for two) is skippable — the free shoreline is the postcard. Höfn is langoustine country, but the veg/chicken picks are covered.']
+  ];
+  document.getElementById('insights').innerHTML=ins.map(x=>`<div class="ins ${x[0]==='amber'?'amber':x[0]==='warn'?'warn':''}"><h3><span class="tag">${x[0]==='warn'?'Safety':x[0]==='amber'?'Save $':'Optimized'}</span>${x[1]}</h3><p>${x[2]}</p></div>`).join('');
+}
+function renderTabs(){
+  document.getElementById('tabs').innerHTML=DATA.map((d,i)=>
+    `<button class="tab ${i===0?'on':''}" style="--dc:var(--d${i+1})" data-i="${i}">
+      <span class="dn">Day ${d.n}</span><span class="dd">${d.dow}</span><span class="dt">${d.date}</span></button>`).join('');
+  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>selectDay(+t.dataset.i));
+}
+function renderFilters(){
+  const f=document.getElementById('filters');
+  f.innerHTML='<span class="lab">Filter</span>'+FILTERS.map(k=>{
+    const c=CK[k];return `<button class="fchip" data-k="${k}"><span class="dot" style="background:${c[1]}"></span>${c[0]}</button>`;
+  }).join('')+'<button class="fchip" data-k="__clear" style="font-weight:700">Clear</button>';
+  f.querySelectorAll('.fchip').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.k;
+    if(k==='__clear'){activeFilters.clear();}
+    else if(activeFilters.has(k))activeFilters.delete(k); else activeFilters.add(k);
+    applyFilters();
+  });
+}
+function applyFilters(){
+  document.querySelectorAll('.fchip').forEach(b=>b.classList.toggle('on',activeFilters.has(b.dataset.k)));
+  document.querySelectorAll('#timeline .card').forEach(c=>{
+    if(activeFilters.size===0){c.classList.remove('dim');return;}
+    const kinds=(c.dataset.kinds||'').split(' ');
+    const ok=[...activeFilters].some(f=>kinds.includes(f));
+    c.classList.toggle('dim',!ok);
+  });
+}
+
+function selectDay(i,scroll){
+  curDay=i;
+  document.querySelectorAll('.tab').forEach((t,ti)=>t.classList.toggle('on',ti===i));
+  const d=DATA[i];
+  const tl=document.getElementById('timeline');
+  let html=`<div class="dayhead" style="--dc:var(--d${i+1})"><div class="dbadge">Day ${d.n} · ${d.dow}, ${d.date}</div>
+    <h2>${d.title}</h2><p class="dsub">${d.sub}</p>
+    <div class="dayfacts">${d.facts.map(f=>`<span class="fact">${f}</span>`).join('')}</div></div><div class="tl" style="--dc:var(--d${i+1})">`;
+  d.stops.forEach((s,idx)=>{ html += s.type==='drive'?legHTML(s):cardHTML(s,i,idx); });
+  html+='</div>';
+  tl.innerHTML=html;
+  document.getElementById('mapday').textContent=d.n;
+  document.getElementById('mapsub').textContent=d.route||'Tap a pin or a stop to link them.';
+  wireCards();
+  drawMap();
+  applyFilters();
+  revealObserve();
+  if(scroll!==false)window.scrollTo({top:document.querySelector('.daybar').offsetTop-4,behavior:'smooth'});
+}
+
+function wireCards(){
+  document.querySelectorAll('#timeline .card').forEach(c=>{
+    c.onmouseenter=()=>highlightPin(c.id,true);
+    c.onmouseleave=()=>highlightPin(c.id,false);
+    c.onclick=()=>{highlightPin(c.id,true,true);};
+  });
+}
+
+/* ---------- MAP ---------- */
+const P=MAP.proj;
+function proj(lon,lat){return [ (lon-P.LON0)*P.K*P.COSLAT, (P.LAT0-lat)*P.K ];}
+function drawMap(){
+  const d=DATA[curDay];
+  const geo=d.stops.map((s,idx)=>({s,idx})).filter(o=>o.s.lon!=null);
+  const pts=geo.map(o=>proj(o.s.lon,o.s.lat));
+  const islands=MAP.paths.map(p=>`<path class="isle" d="${p}"/>`).join('');
+  // full route (all days faint) + active day route
+  let allRoute='';
+  DATA.forEach((dd,di)=>{
+    const g=dd.stops.filter(s=>s.lon!=null);
+    if(g.length<2)return;
+    const dpts=g.map(s=>proj(s.lon,s.lat));
+    allRoute+=`<path class="route${di===curDay?' act':''}" style="--dc:var(--d${di+1})" d="M${dpts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L')}"/>`;
+  });
+  const dc=`var(--d${curDay+1})`;
+  const marks=geo.map((o,k)=>{
+    const [x,y]=pts[k]; const id=`s-${curDay}-${o.idx}`;
+    const anchor = x>380? 'end' : 'start';
+    const lx = anchor==='end'? x-9 : x+9;
+    return `<g class="mk" data-card="${id}" style="--dc:${dc}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})">
+      <circle class="hit" r="11"></circle>
+      <circle class="pin" r="5" fill="${'var(--d'+(curDay+1)+')'}"></circle>
+      <text class="lbl" x="${(lx-x).toFixed(1)}" y="3.5" text-anchor="${anchor}">${k+1}. ${o.s.short||o.s.name}</text>
+    </g>`;
+  }).join('');
+  document.getElementById('mapwrap').innerHTML=
+    `<svg class="map" viewBox="-6 18 476 322" role="img" aria-label="Route map for day ${d.n}">
+      ${islands}${allRoute}${marks}</svg>`;
+  document.querySelectorAll('.mk').forEach(g=>{
+    g.onclick=()=>{const c=document.getElementById(g.dataset.card);if(c){c.scrollIntoView({behavior:'smooth',block:'center'});flash(c);}};
+    g.onmouseenter=()=>g.classList.add('on');
+    g.onmouseleave=()=>g.classList.remove('on');
+  });
+  // legend = days
+  document.getElementById('legend').innerHTML=DATA.map((dd,di)=>
+    `<span style="--lc:var(--d${di+1});${di===curDay?'font-weight:700;color:var(--ink)':''}">Day ${dd.n}</span>`).join('');
+}
+function highlightPin(cardId,on,scroll){
+  document.querySelectorAll('.mk').forEach(g=>{
+    if(g.dataset.card===cardId){g.classList.toggle('on',on); if(on)g.parentNode.appendChild(g);}
+  });
+  if(scroll){document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+    const c=document.getElementById(cardId); if(c)c.classList.add('active');}
+}
+function flash(c){document.querySelectorAll('.card').forEach(x=>x.classList.remove('active'));c.classList.add('active');
+  const id=c.id;document.querySelectorAll('.mk').forEach(g=>g.classList.toggle('on',g.dataset.card===id));}
+
+/* ---------- budget ---------- */
+function renderBudget(){
+  const rows=[
+    ['Day 1 — Hella','Helja Glamping ✓','Groceries + casual dinner','Kerið + Þingvellir pkg','','~$300'],
+    ['Day 2 — Höfn','Seljavellir GH ✓ €322','Skógar lunch + Höfn dinner','Glacier hike (2) + Vestrahorn','','~$600'],
+    ['Day 3 — Vík','Vík Cottages ✓','Skaftafell lunch + Vík dinner','Canyon + beach parking','','~$280'],
+    ['Day 4 — Reykjavík','Reykjavik Marina ✓ $316','Reykjavík lunch + dinner','Church tower (2)','','~$400'],
+  ];
+  const head=`<thead><tr><th>Day / base</th><th>Sleep</th><th>Food (2)</th><th>Activities</th><th></th><th class="n">Est.</th></tr></thead>`;
+  const body=rows.map(r=>`<tr><td><b>${r[0].split('—')[0]}</b>—${r[0].split('—')[1]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td></td><td class="n">${r[5]}</td></tr>`).join('');
+  const foot=`<tr><td>Fuel · ~730 mi compact</td><td colspan="4">Top off in Vík &amp; Höfn</td><td class="n">~$210</td></tr>
+    <tr class="tot"><td colspan="5">Trip total for two (excl. flights &amp; your booked car)</td><td class="n">≈ $1,790</td></tr>`;
+  document.getElementById('btable').innerHTML=head+'<tbody>'+body+foot+'</tbody>';
+}
+
+/* ---------- reveal on scroll ---------- */
+let io;
+function revealObserve(){
+  if(!io)io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+  document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+}
+
+/* ---------- theme ---------- */
+const tb=document.getElementById('themebtn');
+tb.onclick=()=>{
+  const cur=document.documentElement.getAttribute('data-theme');
+  const sysDark=matchMedia('(prefers-color-scheme:dark)').matches;
+  const now=cur|| (sysDark?'dark':'light');
+  document.documentElement.setAttribute('data-theme', now==='dark'?'light':'dark');
+};
+
+/* ---------- init ---------- */
+renderMeta();renderInsights();renderTabs();renderFilters();renderBudget();
+selectDay(0,false);revealObserve();
+</script>
