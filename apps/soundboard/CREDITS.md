@@ -14,16 +14,12 @@ Downloaded from https://mixkit.co/free-sound-effects/ and processed locally
 |---------------|-----------------|------------------------------------------|
 | Magic Wand    | magic-wand.wav  | "Fairy magic sparkle"                    |
 | Laughter      | laughter.wav    | "Big crowd laughing" (trimmed)           |
-| Dun Dun Dun   | dramatic.wav    | "Cartoon string suspense" (trimmed)      |
 | Applause      | applause.wav    | "Medium size crowd applause" (trimmed)   |
-| Cheer         | cheer.wav       | "Birthday crowd party cheer" (trimmed)   |
+| Cheer         | cheer.wav       | "Loud children crowd outdoors" (trimmed) |
 | Correct!      | ding.wav        | "Game level completed"                   |
 | Wrong!        | buzzer.wav      | "Trombone disappoint" (sad trombone)     |
 | Drumroll      | drumroll.wav    | "Drum Roll" (trimmed)                     |
-| Boing         | boing.wav       | "Spring metal hit"                       |
-| Whoosh        | whoosh.wav      | "Swirling whoosh"                        |
 | Pop           | pop.wav         | "Long pop"                               |
-| Ba-Dum-Tss    | rimshot.wav     | "Drum joke accent"                       |
 
 Mixkit Free License: https://mixkit.co/license/#sfxFree — free to use in commercial
 and non-commercial projects, no attribution required; do not resell/redistribute the
@@ -34,9 +30,12 @@ as button sounds inside this classroom app is within the license.
 
 Synthesized from scratch (numpy) for this app; no license restrictions:
 
-`crickets.wav`, `tada.wav` (Ta-Da!), `bell.wav` (Attention), `countdown.wav`,
-`chime.wav` (Clean-Up), `cash-register.wav` (Ka-Ching), `order-up.wav` (Order Up!),
-`timer.wav` (Timer's Up).
+`dramatic.wav` (Dun Dun Dun — classic three-hit orchestral sting), `rimshot.wav`
+(Ba-Dum-Tss — classic snare-snare-cymbal), `crickets.wav`, `tada.wav` (Ta-Da!),
+`bell.wav` (Attention), `countdown.wav`, `chime.wav` (Clean-Up),
+`cash-register.wav` (Ka-Ching), `order-up.wav` (Order Up!), `timer.wav` (Timer's Up).
+
+(Boing and Whoosh were removed at the teacher's request.)
 
 ## Swapping a sound
 
