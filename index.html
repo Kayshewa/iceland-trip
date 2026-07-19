@@ -114,6 +114,8 @@ a{color:inherit; text-decoration:none}
 .t-quado .icon{background:var(--green-soft);color:var(--green)}
 .t-c3 .icon{background:var(--violet-soft);color:var(--violet)}
 .t-swing .icon{background:var(--amber-soft);color:var(--amber)}
+.t-sound .icon{background:var(--rose-soft);color:var(--rose)}
+.t-land .icon{background:var(--green-soft);color:var(--green)}
 
 /* ---- submenu (Vacation Itineraries) ---- */
 .submenu{display:none;flex-direction:column;gap:2px;margin:2px -6px -4px;padding-top:4px;border-top:1px dashed var(--line)}
@@ -232,6 +234,12 @@ const TILES = [
     title:"SwingBot", kicker:"Markets",
     desc:"An autonomous long-only swing-trader — a read-only look at how it reads the market regime, gates every trade, and screens its universe. Account balances and controls stay private.",
     href:"apps/swingbot/", status:"live", locked:true
+  },
+  {
+    id:"soundboard", cls:"t-sound", icon:"🎵",
+    title:"DJ Money's Soundboard", kicker:"Classroom",
+    desc:"A cafe-themed classroom soundboard — magic wand, applause, crickets, drumroll, and more, plus buttons you can load your own sounds onto. Works offline.",
+    href:"apps/soundboard/", status:"live", locked:false
   },
   {
     id:"landscout", cls:"t-land", icon:"🌲",

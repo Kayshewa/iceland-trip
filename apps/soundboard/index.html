@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="DJ Money's Soundboard — a cafe-themed classroom soundboard with magic wand, applause, crickets, and your own custom sounds.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#6f4a2f">
+<title>DJ Money's Soundboard ☕</title>
+<style>
+/* ============================================================
+   DJ MONEY'S SOUNDBOARD — "Cafe" theme
+   Self-contained: system fonts only, no CDNs, no external calls.
+   ============================================================ */
+:root{
+  --crema:#f5e9d6; --crema2:#efdcc0; --foam:#fbf3e6;
+  --espresso:#3a2418; --cocoa:#5b3a25; --coffee:#6f4a2f; --coffee2:#8a5c39;
+  --caramel:#c98a3c; --caramel2:#e0a85a; --mocha:#7a5a44;
+  --board:#2f3a30; --board-line:#5c6b5a;   /* chalkboard menu */
+  --chalk:#f3efe4;
+  --ink:#3a2418; --ink2:#6f5744; --ink3:#9a836d;
+  --line:#e2d0b4; --line2:#d3bd9a;
+  --card:#fffaf1; --card2:#f7ecd9;
+  --good:#3f8f5b; --bad:#c0503f;
+  --shadow:0 1px 2px rgba(80,50,20,.10),0 10px 26px rgba(80,50,20,.14);
+  --shadow-lg:0 4px 10px rgba(80,50,20,.16),0 24px 60px rgba(80,50,20,.22);
+  --radius:20px;
+  --sans:'Trebuchet MS','Segoe UI',system-ui,-apple-system,Roboto,'Helvetica Neue',sans-serif;
+  --display:'Marker Felt','Comic Sans MS','Trebuchet MS',var(--sans);
+}
+:root[data-theme="night"]{
+  --crema:#241a13; --crema2:#1c140e; --foam:#2a1f16;
+  --foam-panel:#2f2318;
+  --ink:#f3e7d5; --ink2:#cdb79c; --ink3:#9c876e;
+  --line:#40301f; --line2:#523d27;
+  --card:#31251a; --card2:#3a2c1e;
+  --board:#20281f; --board-line:#3d4a3b;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.5);
+  --shadow-lg:0 4px 10px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; color:var(--ink); font-family:var(--sans); line-height:1.4;
+  -webkit-font-smoothing:antialiased; min-height:100vh;
+  background:
+    radial-gradient(1200px 500px at 15% -10%, rgba(224,168,90,.20), transparent 60%),
+    radial-gradient(1000px 460px at 100% 0%, rgba(111,74,47,.18), transparent 55%),
+    linear-gradient(180deg,var(--foam),var(--crema) 55%,var(--crema2));
+  background-attachment:fixed;
+}
+:root[data-theme="night"] body{
+  background:
+    radial-gradient(1200px 500px at 15% -10%, rgba(201,138,60,.14), transparent 60%),
+    radial-gradient(1000px 460px at 100% 0%, rgba(0,0,0,.4), transparent 55%),
+    linear-gradient(180deg,#2a1f16,#1c140e 60%,#150f0a);
+}
+.wrap{max-width:1100px; margin:0 auto; padding:clamp(14px,3vw,30px) clamp(12px,3vw,26px) 90px}
+
+/* ---------------- Header: a cafe menu board ---------------- */
+.board{
+  position:relative; background:
+    linear-gradient(180deg,var(--board),#28322a);
+  border:10px solid var(--coffee); border-radius:22px;
+  box-shadow:var(--shadow-lg), inset 0 0 0 2px rgba(255,255,255,.04), inset 0 0 60px rgba(0,0,0,.35);
+  padding:clamp(18px,3.5vw,30px) clamp(18px,4vw,40px); color:var(--chalk); overflow:hidden;
+  margin-bottom:clamp(16px,3vw,26px);
+}
+.board:before{ /* chalk dust texture */
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.06), transparent),
+    radial-gradient(2px 2px at 70% 60%, rgba(255,255,255,.05), transparent),
+    radial-gradient(1px 1px at 45% 80%, rgba(255,255,255,.05), transparent);
+}
+.board-top{display:flex; align-items:center; gap:16px; flex-wrap:wrap}
+.logo{flex:none; width:60px; height:60px; border-radius:16px; display:grid; place-items:center;
+  background:linear-gradient(135deg,var(--caramel),var(--coffee)); font-size:34px;
+  box-shadow:0 4px 12px rgba(0,0,0,.35); position:relative}
+.steam{position:absolute; top:-10px; left:50%; width:5px; height:14px; border-radius:3px;
+  background:rgba(255,255,255,.5); filter:blur(2px); opacity:0; transform:translateX(-50%)}
+.steam.s2{left:38%} .steam.s3{left:62%}
+.logo:hover .steam{animation:steam 1.6s ease-in-out infinite}
+.logo:hover .s2{animation-delay:.4s} .logo:hover .s3{animation-delay:.8s}
+@keyframes steam{0%{opacity:0;transform:translate(-50%,0) scale(1)}30%{opacity:.7}100%{opacity:0;transform:translate(-50%,-16px) scale(1.6)}}
+.title h1{margin:0; font-family:var(--display); font-weight:700; letter-spacing:.5px;
+  font-size:clamp(28px,5.5vw,46px); line-height:1;
+  color:#fdf6e9; text-shadow:0 2px 0 rgba(0,0,0,.25), 1px 1px 0 rgba(255,255,255,.06)}
+.title .sub{display:block; margin-top:6px; font-family:var(--display); font-size:clamp(13px,2vw,16px);
+  color:#e7d9c2; opacity:.85; letter-spacing:.4px}
+.board-rule{height:2px; margin:16px 0 4px; border:0; border-radius:2px;
+  background:repeating-linear-gradient(90deg, rgba(224,200,150,.55) 0 22px, transparent 22px 34px)}
+
+/* ---------------- Controls bar ---------------- */
+.controls{display:flex; align-items:center; gap:10px 14px; flex-wrap:wrap; margin-top:14px}
+.ctrl{display:inline-flex; align-items:center; gap:9px; background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.16); color:#f3e7d3; padding:9px 14px; border-radius:12px;
+  font-size:15px; font-weight:600; cursor:pointer; font-family:var(--sans); user-select:none}
+.ctrl:hover{background:rgba(255,255,255,.18)}
+.ctrl:active{transform:translateY(1px)}
+.ctrl.stop{background:rgba(192,80,63,.9); border-color:transparent; color:#fff}
+.ctrl.stop:hover{background:#b5442f}
+.vol{display:inline-flex; align-items:center; gap:10px; color:#f3e7d3; font-size:14px; font-weight:600}
+.vol input[type=range]{-webkit-appearance:none; appearance:none; width:130px; height:6px; border-radius:6px;
+  background:rgba(255,255,255,.25); outline:none}
+.vol input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:20px; height:20px; border-radius:50%;
+  background:var(--caramel2); border:2px solid #fff; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.vol input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--caramel2);border:2px solid #fff;cursor:pointer}
+.spacer{flex:1}
+
+/* ---------------- Section headings ---------------- */
+.section{margin:clamp(20px,3vw,30px) 2px 12px; display:flex; align-items:baseline; gap:10px}
+.section h2{margin:0; font-family:var(--display); font-size:clamp(19px,3vw,24px); color:var(--coffee)}
+:root[data-theme="night"] .section h2{color:var(--caramel2)}
+.section .note{font-size:13px; color:var(--ink3)}
+
+/* ---------------- Sound grid ---------------- */
+.grid{display:grid; gap:clamp(10px,1.8vw,16px);
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+@media (max-width:520px){ .grid{grid-template-columns:repeat(2,1fr)} }
+
+.pad{position:relative; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--card); box-shadow:var(--shadow); cursor:pointer; user-select:none;
+  padding:18px 12px 15px; min-height:120px; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:9px; text-align:center;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s;
+  overflow:hidden; -webkit-user-select:none; touch-action:manipulation}
+.pad:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg); border-color:var(--line2)}
+.pad:active{transform:translateY(0) scale(.97)}
+.pad .emoji{font-size:clamp(30px,5vw,40px); line-height:1; filter:drop-shadow(0 2px 3px rgba(80,50,20,.18))}
+.pad .label{font-size:14.5px; font-weight:700; color:var(--ink); letter-spacing:.2px}
+.pad .tag{font-size:11px; color:var(--ink3); font-weight:600; text-transform:uppercase; letter-spacing:.5px}
+/* warm accent stripe on top */
+.pad:before{content:""; position:absolute; top:0; left:0; right:0; height:5px;
+  background:var(--acc,var(--caramel))}
+/* playing state */
+.pad.playing{border-color:var(--acc,var(--caramel))}
+.pad.playing .emoji{animation:bounce .5s ease}
+@keyframes bounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-8px) scale(1.12)}}
+.pad .ring{position:absolute; inset:0; border-radius:var(--radius); pointer-events:none;
+  box-shadow:0 0 0 0 var(--acc,var(--caramel)); opacity:0}
+.pad.playing .ring{animation:ring .6s ease-out}
+@keyframes ring{0%{opacity:.5; box-shadow:0 0 0 0 var(--acc)}100%{opacity:0; box-shadow:0 0 0 16px var(--acc)}}
+
+/* custom pad extras */
+.pad.custom .mini{position:absolute; top:6px; right:6px; display:flex; gap:4px; opacity:0; transition:opacity .12s}
+.pad.custom:hover .mini, .pad.custom.show-mini .mini{opacity:1}
+.mini button{width:26px; height:26px; border-radius:8px; border:1px solid var(--line2);
+  background:var(--card2); color:var(--ink2); font-size:13px; cursor:pointer; display:grid; place-items:center; padding:0}
+.mini button:hover{background:var(--line); color:var(--ink)}
+
+/* empty / add slot */
+.pad.add{background:repeating-linear-gradient(135deg,var(--card2) 0 12px, transparent 12px 24px);
+  border:2px dashed var(--line2); box-shadow:none; color:var(--ink3)}
+.pad.add:before{display:none}
+.pad.add:hover{border-color:var(--caramel); color:var(--coffee); background:var(--card2)}
+.pad.add .emoji{font-size:32px; filter:none}
+.pad.add .label{color:inherit; font-weight:600}
+
+/* toast + hidden file input */
+#toast{position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
+  background:var(--espresso); color:#fdf3e3; padding:11px 18px; border-radius:12px; font-size:14px;
+  font-weight:600; box-shadow:var(--shadow-lg); opacity:0; pointer-events:none; transition:.25s; z-index:50; max-width:90vw}
+#toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+#file{display:none}
+
+footer{margin-top:34px; text-align:center; color:var(--ink3); font-size:13px}
+footer a{color:var(--coffee); text-decoration:underline; text-underline-offset:2px}
+:root[data-theme="night"] footer a{color:var(--caramel2)}
+.backhome{display:inline-flex; align-items:center; gap:6px; margin-top:8px}
+
+/* modal for naming custom sounds */
+#modal{position:fixed; inset:0; z-index:100; display:none; align-items:center; justify-content:center;
+  background:rgba(40,25,12,.55); backdrop-filter:blur(4px); padding:22px}
+#modal.show{display:flex}
+.sheet{width:min(94vw,380px); background:var(--card); border:1px solid var(--line2); border-radius:20px;
+  box-shadow:var(--shadow-lg); padding:24px 22px; text-align:center}
+.sheet h3{margin:0 0 4px; font-family:var(--display); font-size:22px; color:var(--coffee)}
+.sheet p{margin:0 0 16px; font-size:13.5px; color:var(--ink2)}
+.emopick{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:14px}
+.emopick button{width:40px; height:40px; border-radius:10px; border:1px solid var(--line); background:var(--card2);
+  font-size:21px; cursor:pointer}
+.emopick button.sel{border-color:var(--caramel); background:var(--caramel2); transform:scale(1.05)}
+.sheet input[type=text]{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line2);
+  background:var(--foam); color:var(--ink); font-size:16px; font-family:var(--sans); outline:none}
+:root[data-theme="night"] .sheet input[type=text]{background:var(--crema)}
+.sheet input:focus{border-color:var(--caramel)}
+.sheet-btns{display:flex; gap:10px; margin-top:18px}
+.sheet-btns button{flex:1; padding:12px; border-radius:12px; border:0; font-size:15px; font-weight:700; cursor:pointer; font-family:var(--sans)}
+.sheet-btns .ok{background:var(--coffee); color:#fff}
+.sheet-btns .ok:hover{background:var(--cocoa)}
+.sheet-btns .cancel{background:var(--card2); color:var(--ink2); border:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ======== Header board ======== -->
+  <header class="board">
+    <div class="board-top">
+      <div class="logo">☕<span class="steam s1"></span><span class="steam s2"></span><span class="steam s3"></span></div>
+      <div class="title">
+        <h1>DJ Money's Soundboard</h1>
+        <span class="sub">~ The Classroom Cafe · fresh sounds served daily ~</span>
+      </div>
+    </div>
+    <hr class="board-rule">
+    <div class="controls">
+      <button class="ctrl stop" id="stopAll" title="Stop everything">■ Stop All</button>
+      <label class="vol" title="Volume">🔊
+        <input type="range" id="vol" min="0" max="1" step="0.01" value="0.85" aria-label="Volume">
+      </label>
+      <span class="spacer"></span>
+      <button class="ctrl" id="loopBtn" title="Loop the next sound you press" aria-pressed="false">🔁 Loop: Off</button>
+      <button class="ctrl" id="themeBtn" title="Toggle day / night">🌙 Night</button>
+    </div>
+  </header>
+
+  <!-- ======== Preset sounds ======== -->
+  <div class="section"><h2>🍩 House Blend</h2><span class="note">tap a pad to play</span></div>
+  <main class="grid" id="presetGrid"></main>
+
+  <!-- ======== Custom / programmable ======== -->
+  <div class="section"><h2>🧑‍🍳 Your Specials</h2><span class="note">tap “＋ Add” to load your own sound</span></div>
+  <main class="grid" id="customGrid"></main>
+
+  <footer>
+    <div>Made for the classroom cafe · sounds are built-in &amp; work offline ☕</div>
+    <a class="backhome" href="../../">← Back to Tripi &amp; Kayshewa apps</a>
+  </footer>
+</div>
+
+<input type="file" id="file" accept="audio/*">
+<div id="toast"></div>
+
+<!-- naming modal -->
+<div id="modal" role="dialog" aria-modal="true" aria-label="Name your sound">
+  <div class="sheet">
+    <h3 id="modalTitle">Name your special</h3>
+    <p>Pick an icon and a name for this button.</p>
+    <div class="emopick" id="emopick"></div>
+    <input type="text" id="soundName" maxlength="24" placeholder="e.g. Air Horn" autocomplete="off">
+    <div class="sheet-btns">
+      <button class="cancel" id="modalCancel">Cancel</button>
+      <button class="ok" id="modalOk">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   PRESET SOUND CONFIG — the 5 requested + more classroom picks.
+   To swap a clip, just replace the file in ./sounds/ (keep name).
+   `acc` is the pad's accent colour.
+   ============================================================ */
+const PRESETS = [
+  { file:"magic-wand",    emoji:"✨", label:"Magic Wand",  acc:"#b57edc" },
+  { file:"crickets",      emoji:"🦗", label:"Crickets",    acc:"#6a8f4f" },
+  { file:"laughter",      emoji:"😂", label:"Laughter",    acc:"#e0a85a" },
+  { file:"dramatic",      emoji:"😱", label:"Dun Dun Dun", acc:"#8a5c39" },
+  { file:"applause",      emoji:"👏", label:"Applause",    acc:"#e08a3c" },
+  { file:"cheer",         emoji:"🎉", label:"Cheer",       acc:"#e8607a" },
+  { file:"ding",          emoji:"✅", label:"Correct!",    acc:"#3f8f5b" },
+  { file:"buzzer",        emoji:"❌", label:"Wrong!",      acc:"#c0503f" },
+  { file:"drumroll",      emoji:"🥁", label:"Drumroll",    acc:"#8a5c39" },
+  { file:"tada",          emoji:"🎊", label:"Ta-Da!",      acc:"#d98cc0" },
+  { file:"bell",          emoji:"🛎️", label:"Attention",   acc:"#c98a3c" },
+  { file:"countdown",     emoji:"⏱️", label:"Countdown",   acc:"#5b8fb0" },
+  { file:"chime",         emoji:"🎐", label:"Clean-Up",    acc:"#5aa3a8" },
+  { file:"boing",         emoji:"🤾", label:"Boing",       acc:"#6a8f4f" },
+  { file:"whoosh",        emoji:"💨", label:"Whoosh",      acc:"#9aa0a6" },
+  { file:"pop",           emoji:"🫧", label:"Pop",         acc:"#5b8fb0" },
+  { file:"rimshot",       emoji:"🪘", label:"Ba-Dum-Tss",  acc:"#8a5c39" },
+  { file:"cash-register", emoji:"💰", label:"Ka-Ching",    acc:"#3f8f5b" },
+  { file:"order-up",      emoji:"☕", label:"Order Up!",   acc:"#6f4a2f" },
+  { file:"timer",         emoji:"⏲️", label:"Timer's Up",  acc:"#c0503f" },
+];
+const CUSTOM_ACCENTS = ["#b57edc","#e08a3c","#3f8f5b","#5b8fb0","#e8607a","#6a8f4f","#c98a3c","#8a5c39"];
+const CUSTOM_EMOJIS = ["🎵","📣","🔊","🎺","🎸","🐶","🐱","🚀","⭐","🔥","🎈","🍕","🦄","👽","🤖","🎮","⚡","💥","🥳","🎯"];
+const MAX_CUSTOM = 8;
+
+/* ============================================================
+   AUDIO ENGINE (Web Audio API) — instant, overlapping, Stop All.
+   ============================================================ */
+let AC = null, master = null;
+const buffers = new Map();     // key -> AudioBuffer
+const active = new Set();      // live source nodes (for Stop All)
+let loopMode = false;
+
+function ensureCtx(){
+  if(AC) return;
+  AC = new (window.AudioContext || window.webkitAudioContext)();
+  master = AC.createGain();
+  master.gain.value = parseFloat(document.getElementById('vol').value);
+  master.connect(AC.destination);
+}
+async function loadBuffer(key, url){
+  if(buffers.has(key)) return buffers.get(key);
+  const res = await fetch(url);
+  if(!res.ok) throw new Error("fetch "+url);
+  const arr = await res.arrayBuffer();
+  const buf = await AC.decodeAudioData(arr);
+  buffers.set(key, buf);
+  return buf;
+}
+async function loadBufferFromBlob(key, blob){
+  if(buffers.has(key)) return buffers.get(key);
+  const arr = await blob.arrayBuffer();
+  const buf = await AC.decodeAudioData(arr.slice(0));
+  buffers.set(key, buf);
+  return buf;
+}
+function playBuffer(buf, padEl){
+  const src = AC.createBufferSource();
+  src.buffer = buf;
+  src.loop = loopMode;
+  src.connect(master);
+  src.start(0);
+  active.add(src);
+  if(padEl){
+    padEl.classList.remove('playing'); void padEl.offsetWidth; padEl.classList.add('playing');
+    src._pad = padEl;
+  }
+  src.onended = ()=>{ active.delete(src); if(padEl && !anyActiveForPad(padEl)) padEl.classList.remove('playing'); };
+}
+function anyActiveForPad(pad){ for(const s of active){ if(s._pad===pad) return true; } return false; }
+function stopAll(){
+  for(const s of active){ try{ s.stop(); }catch(e){} }
+  active.clear();
+  document.querySelectorAll('.pad.playing').forEach(p=>p.classList.remove('playing'));
+}
+
+/* ============================================================
+   IndexedDB — persist uploaded custom sounds (blobs) per device.
+   ============================================================ */
+const DB_NAME="djmoney_soundboard", STORE="customs";
+function openDB(){
+  return new Promise((res,rej)=>{
+    const r = indexedDB.open(DB_NAME,1);
+    r.onupgradeneeded = ()=>{ r.result.createObjectStore(STORE,{keyPath:"id"}); };
+    r.onsuccess = ()=>res(r.result);
+    r.onerror = ()=>rej(r.error);
+  });
+}
+async function dbAll(){
+  const db=await openDB();
+  return new Promise((res,rej)=>{
+    const tx=db.transaction(STORE,"readonly").objectStore(STORE).getAll();
+    tx.onsuccess=()=>res(tx.result||[]); tx.onerror=()=>rej(tx.error);
+  });
+}
+async function dbPut(rec){
+  const db=await openDB();
+  return new Promise((res,rej)=>{
+    const tx=db.transaction(STORE,"readwrite").objectStore(STORE).put(rec);
+    tx.onsuccess=()=>res(); tx.onerror=()=>rej(tx.error);
+  });
+}
+async function dbDel(id){
+  const db=await openDB();
+  return new Promise((res,rej)=>{
+    const tx=db.transaction(STORE,"readwrite").objectStore(STORE).delete(id);
+    tx.onsuccess=()=>res(); tx.onerror=()=>rej(tx.error);
+  });
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const presetGrid=document.getElementById('presetGrid');
+const customGrid=document.getElementById('customGrid');
+let customs=[]; // {id,name,emoji,acc,blob}
+
+function padEl(cfg, kind){
+  const el=document.createElement('button');
+  el.className='pad'+(kind==='custom'?' custom':'');
+  el.style.setProperty('--acc', cfg.acc||'#c98a3c');
+  el.innerHTML =
+    `<span class="ring"></span>
+     <span class="emoji">${cfg.emoji}</span>
+     <span class="label">${escapeHtml(cfg.label)}</span>`+
+    (kind==='custom'
+      ? `<span class="mini"><button class="edit" title="Rename">✎</button><button class="del" title="Delete">🗑</button></span>`
+      : `<span class="tag"></span>`);
+  return el;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function renderPresets(){
+  PRESETS.forEach(cfg=>{
+    const el=padEl(cfg,'preset');
+    el.addEventListener('click', async ()=>{
+      ensureCtx(); if(AC.state==='suspended') await AC.resume();
+      try{ const buf=await loadBuffer(cfg.file, `sounds/${cfg.file}.wav`); playBuffer(buf, el); }
+      catch(e){ toast("Couldn't load that sound"); console.error(e); }
+    });
+    presetGrid.appendChild(el);
+  });
+}
+
+function renderCustoms(){
+  customGrid.innerHTML='';
+  customs.forEach(c=>{
+    const el=padEl(c,'custom');
+    el.addEventListener('click', async (ev)=>{
+      if(ev.target.closest('.mini')) return;
+      ensureCtx(); if(AC.state==='suspended') await AC.resume();
+      try{ const buf=await loadBufferFromBlob('c_'+c.id, c.blob); playBuffer(buf, el); }
+      catch(e){ toast("This file couldn't be played"); console.error(e); }
+    });
+    el.querySelector('.del').addEventListener('click', async (ev)=>{
+      ev.stopPropagation();
+      if(confirm(`Delete "${c.name}"?`)){
+        await dbDel(c.id); customs=customs.filter(x=>x.id!==c.id); buffers.delete('c_'+c.id); renderCustoms();
+        toast("Deleted");
+      }
+    });
+    el.querySelector('.edit').addEventListener('click', (ev)=>{ ev.stopPropagation(); openModal(c); });
+    customGrid.appendChild(el);
+  });
+  // add-slot(s)
+  if(customs.length < MAX_CUSTOM){
+    const add=document.createElement('button');
+    add.className='pad add';
+    add.innerHTML=`<span class="emoji">＋</span><span class="label">Add a sound</span>`;
+    add.addEventListener('click', ()=>{ pendingEdit=null; document.getElementById('file').click(); });
+    customGrid.appendChild(add);
+  }
+}
+
+/* ============================================================
+   UPLOAD + NAMING MODAL
+   ============================================================ */
+const fileInput=document.getElementById('file');
+const modal=document.getElementById('modal');
+let pendingBlob=null, pendingEdit=null, pickedEmoji=CUSTOM_EMOJIS[0];
+
+fileInput.addEventListener('change', ()=>{
+  const f=fileInput.files[0]; fileInput.value='';
+  if(!f) return;
+  if(f.size > 8*1024*1024){ toast("That file is a bit big (max ~8 MB)"); return; }
+  // sanity: try decoding before saving
+  ensureCtx();
+  const reader=new FileReader();
+  reader.onload=async ()=>{
+    try{ await AC.decodeAudioData(reader.result.slice(0)); }
+    catch(e){ toast("That doesn't look like a playable audio file"); return; }
+    pendingBlob=f;
+    openModal(null, f.name.replace(/\.[^.]+$/,'').slice(0,24));
+  };
+  reader.readAsArrayBuffer(f);
+});
+
+function buildEmojiPicker(sel){
+  const wrap=document.getElementById('emopick'); wrap.innerHTML='';
+  CUSTOM_EMOJIS.forEach(em=>{
+    const b=document.createElement('button'); b.textContent=em;
+    if(em===sel) b.classList.add('sel');
+    b.addEventListener('click', ()=>{ pickedEmoji=em; wrap.querySelectorAll('button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); });
+    wrap.appendChild(b);
+  });
+}
+function openModal(editRec, suggestedName){
+  pendingEdit=editRec||null;
+  pickedEmoji = editRec ? editRec.emoji : CUSTOM_EMOJIS[Math.floor(Math.random()*CUSTOM_EMOJIS.length)];
+  buildEmojiPicker(pickedEmoji);
+  const nameEl=document.getElementById('soundName');
+  nameEl.value = editRec ? editRec.name : (suggestedName||'');
+  document.getElementById('modalTitle').textContent = editRec ? "Edit special" : "Name your special";
+  modal.classList.add('show');
+  setTimeout(()=>nameEl.focus(),40);
+}
+function closeModal(){ modal.classList.remove('show'); pendingBlob=null; pendingEdit=null; }
+document.getElementById('modalCancel').addEventListener('click', closeModal);
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+document.getElementById('soundName').addEventListener('keydown', e=>{ if(e.key==='Enter') document.getElementById('modalOk').click(); });
+
+document.getElementById('modalOk').addEventListener('click', async ()=>{
+  const name=(document.getElementById('soundName').value||'').trim() || 'My Sound';
+  if(pendingEdit){
+    pendingEdit.name=name; pendingEdit.emoji=pickedEmoji;
+    await dbPut(stripBlobRec(pendingEdit));
+    renderCustoms(); closeModal(); toast("Updated");
+    return;
+  }
+  if(!pendingBlob){ closeModal(); return; }
+  const rec={ id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),
+    name, emoji:pickedEmoji, acc:CUSTOM_ACCENTS[customs.length%CUSTOM_ACCENTS.length], blob:pendingBlob };
+  try{
+    await dbPut(rec); customs.push(rec); renderCustoms(); closeModal();
+    toast(`Added "${name}" ✓`);
+  }catch(e){ toast("Couldn't save (storage full?)"); console.error(e); }
+});
+function stripBlobRec(r){ return {id:r.id,name:r.name,emoji:r.emoji,acc:r.acc,blob:r.blob}; }
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+document.getElementById('stopAll').addEventListener('click', stopAll);
+document.getElementById('vol').addEventListener('input', e=>{
+  ensureCtx(); master.gain.value=parseFloat(e.target.value);
+});
+const loopBtn=document.getElementById('loopBtn');
+loopBtn.addEventListener('click', ()=>{
+  loopMode=!loopMode;
+  loopBtn.textContent = loopMode ? "🔁 Loop: On" : "🔁 Loop: Off";
+  loopBtn.setAttribute('aria-pressed', loopMode);
+  loopBtn.style.background = loopMode ? 'rgba(224,168,90,.9)' : '';
+  loopBtn.style.color = loopMode ? '#3a2418' : '';
+  if(!loopMode) stopAll();
+});
+// theme
+const themeBtn=document.getElementById('themeBtn');
+function applyTheme(mode){
+  document.documentElement.setAttribute('data-theme', mode);
+  themeBtn.textContent = mode==='night' ? "☀️ Day" : "🌙 Night";
+  try{ localStorage.setItem('dj_theme', mode); }catch(e){}
+}
+themeBtn.addEventListener('click', ()=>{
+  const cur=document.documentElement.getAttribute('data-theme')==='night'?'night':'day';
+  applyTheme(cur==='night'?'day':'night');
+});
+try{ const s=localStorage.getItem('dj_theme'); if(s) applyTheme(s); }catch(e){}
+
+// keyboard: spacebar / Esc = Stop All ; number keys 1-9,0 trigger first presets
+document.addEventListener('keydown', e=>{
+  if(e.target.tagName==='INPUT') return;
+  if(e.key===' '||e.key==='Escape'){ e.preventDefault(); stopAll(); return; }
+  if(/^[0-9]$/.test(e.key)){
+    const idx = e.key==='0'?9:parseInt(e.key)-1;
+    const pad=presetGrid.children[idx]; if(pad) pad.click();
+  }
+});
+
+/* toast */
+let toastT=null;
+function toast(msg){
+  const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('show'),2200);
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+(async function boot(){
+  renderPresets();
+  try{
+    const recs=await dbAll();
+    customs = recs.sort((a,b)=> (a.id<b.id?-1:1));
+  }catch(e){ customs=[]; console.warn("IndexedDB unavailable", e); }
+  renderCustoms();
+  // Warm up the audio context + preload presets after the first user gesture.
+  const warm=async ()=>{
+    ensureCtx(); if(AC.state==='suspended'){ try{ await AC.resume(); }catch(e){} }
+    PRESETS.forEach(p=> loadBuffer(p.file, `sounds/${p.file}.wav`).catch(()=>{}) );
+    window.removeEventListener('pointerdown', warm); window.removeEventListener('keydown', warm);
+  };
+  window.addEventListener('pointerdown', warm, {once:false});
+  window.addEventListener('keydown', warm, {once:false});
+})();
+</script>
+</body>
+</html>
