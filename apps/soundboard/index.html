@@ -377,7 +377,7 @@ function padEl(cfg, kind){
   el.innerHTML =
     `<span class="ring"></span>
      <span class="emoji">${cfg.emoji}</span>
-     <span class="label">${escapeHtml(cfg.label)}</span>`+
+     <span class="label">${escapeHtml(cfg.label ?? cfg.name ?? '')}</span>`+
     (kind==='custom'
       ? `<span class="mini"><button class="edit" title="Rename">✎</button><button class="del" title="Delete">🗑</button></span>`
       : `<span class="tag"></span>`);
