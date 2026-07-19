@@ -12,18 +12,18 @@ Downloaded from https://mixkit.co/free-sound-effects/ and processed locally
 
 | Button        | File            | Mixkit clip                              |
 |---------------|-----------------|------------------------------------------|
-| Magic Wand    | magic-wand.wav  | "Magic wand sparkle"                     |
+| Magic Wand    | magic-wand.wav  | "Fairy magic sparkle"                    |
 | Laughter      | laughter.wav    | "Big crowd laughing" (trimmed)           |
-| Dun Dun Dun   | dramatic.wav    | "Cinematic mystery trailer drum hit"     |
+| Dun Dun Dun   | dramatic.wav    | "Cartoon string suspense" (trimmed)      |
 | Applause      | applause.wav    | "Medium size crowd applause" (trimmed)   |
-| Cheer         | cheer.wav       | "Stadium joy shouting crowd" (trimmed)   |
-| Correct!      | ding.wav        | "Quick positive video game notification" |
+| Cheer         | cheer.wav       | "Birthday crowd party cheer" (trimmed)   |
+| Correct!      | ding.wav        | "Game level completed"                   |
 | Wrong!        | buzzer.wav      | "Trombone disappoint" (sad trombone)     |
 | Drumroll      | drumroll.wav    | "Drum Roll" (trimmed)                     |
-| Boing         | boing.wav       | "Boing hit sound"                        |
-| Whoosh        | whoosh.wav      | "Fast whoosh transition"                 |
+| Boing         | boing.wav       | "Spring metal hit"                       |
+| Whoosh        | whoosh.wav      | "Swirling whoosh"                        |
 | Pop           | pop.wav         | "Long pop"                               |
-| Ba-Dum-Tss    | rimshot.wav     | "Joke drums"                             |
+| Ba-Dum-Tss    | rimshot.wav     | "Drum joke accent"                       |
 
 Mixkit Free License: https://mixkit.co/license/#sfxFree — free to use in commercial
 and non-commercial projects, no attribution required; do not resell/redistribute the
