@@ -140,52 +140,42 @@ footer a:hover{color:var(--accent)}
 </style>
 </head>
 <body>
-<!-- ===== privacy gate (client-side only; casual privacy, not real security) ===== -->
-<div id="pwgate" role="dialog" aria-modal="true" aria-label="Password required">
-  <form id="pwgate-form" autocomplete="off">
-    <div class="pwgate-lock" aria-hidden="true">🔒</div>
-    <h1>Private</h1>
-    <p>Enter the secret password to continue.</p>
-    <input id="pwgate-input" type="password" autocomplete="current-password" placeholder="Secret password" aria-label="Secret password" autofocus>
-    <div id="pwgate-err" aria-live="polite"></div>
-    <button type="submit">Enter</button>
+<!-- ===== per-app password modal (client-side only; casual privacy, not real security) ===== -->
+<div id="applock" role="dialog" aria-modal="true" aria-label="Password required">
+  <form id="applock-form" autocomplete="off">
+    <button type="button" class="applock-x" aria-label="Cancel">✕</button>
+    <div class="applock-lock" aria-hidden="true">🔒</div>
+    <h1>Private app</h1>
+    <p>Enter the password to open <b id="applock-name">this app</b>.</p>
+    <input id="applock-input" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
+    <div id="applock-err" aria-live="polite"></div>
+    <button type="submit">Unlock</button>
   </form>
 </div>
 <style>
-  #pwgate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;
-    background:#0d1319;color:#eaf1f5;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:24px}
-  @media (prefers-color-scheme:light){#pwgate{background:#edf2f4;color:#141c24}}
-  #pwgate-form{width:min(92vw,360px);text-align:center}
-  #pwgate .pwgate-lock{font-size:40px;margin-bottom:10px}
-  #pwgate h1{font-weight:600;font-size:22px;line-height:1.2;margin:0 0 6px}
-  #pwgate p{margin:0 0 20px;font-size:14.5px;opacity:.7}
-  #pwgate-input{width:100%;box-sizing:border-box;padding:13px 15px;border-radius:12px;
+  #applock{position:fixed;inset:0;z-index:2147483647;display:none;align-items:center;justify-content:center;
+    background:rgba(9,13,18,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    color:#eaf1f5;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:24px}
+  #applock.show{display:flex}
+  #applock-form{position:relative;width:min(92vw,360px);text-align:center;
+    background:#111a22;border:1px solid rgba(127,147,161,.28);border-radius:18px;padding:30px 26px 26px}
+  @media (prefers-color-scheme:light){#applock-form{background:#fff;color:#141c24}}
+  #applock .applock-x{position:absolute;top:12px;right:12px;width:30px;height:30px;padding:0;border:0;
+    border-radius:9px;background:transparent;color:inherit;opacity:.5;font-size:16px;line-height:1;cursor:pointer}
+  #applock .applock-x:hover{opacity:1;background:rgba(127,147,161,.16)}
+  #applock .applock-lock{font-size:38px;margin-bottom:8px}
+  #applock h1{font-weight:600;font-size:21px;line-height:1.2;margin:0 0 6px}
+  #applock p{margin:0 0 18px;font-size:14px;opacity:.72}
+  #applock-input{width:100%;box-sizing:border-box;padding:13px 15px;border-radius:12px;
     border:1px solid rgba(127,147,161,.4);background:rgba(127,147,161,.12);color:inherit;font-size:16px;outline:none}
-  #pwgate-input:focus{border-color:#4fb0da}
-  #pwgate-err{min-height:18px;margin:9px 0 2px;color:#e5484d;font-size:13px}
-  #pwgate button{margin-top:8px;width:100%;padding:13px;border:0;border-radius:12px;
+  #applock-input:focus{border-color:#4fb0da}
+  #applock-err{min-height:18px;margin:9px 0 2px;color:#e5484d;font-size:13px}
+  #applock button[type=submit]{margin-top:8px;width:100%;padding:13px;border:0;border-radius:12px;
     background:#2f6df6;color:#fff;font-size:16px;font-weight:600;cursor:pointer}
-  #pwgate button:hover{filter:brightness(1.07)}
-  html.pwgate-locked{overflow:hidden}
+  #applock button[type=submit]:hover{filter:brightness(1.07)}
+  html.applock-open{overflow:hidden}
 </style>
-<script>
-(function(){
-  var KEY="tk_gate_v1", ENC="VHJhc2hDYXQh";
-  var el=document.getElementById("pwgate"), html=document.documentElement;
-  try{ if(localStorage.getItem(KEY)==="1"){ el.parentNode.removeChild(el); return; } }catch(e){}
-  html.classList.add("pwgate-locked");
-  var f=document.getElementById("pwgate-form"), inp=document.getElementById("pwgate-input"), err=document.getElementById("pwgate-err");
-  f.addEventListener("submit",function(e){
-    e.preventDefault();
-    if(inp.value===atob(ENC)){
-      try{localStorage.setItem(KEY,"1");}catch(e){}
-      el.parentNode.removeChild(el); html.classList.remove("pwgate-locked");
-    } else { err.textContent="Incorrect password. Try again."; inp.value=""; inp.focus(); }
-  });
-  try{inp.focus();}catch(e){}
-})();
-</script>
-<!-- ===== end privacy gate ===== -->
+<!-- ===== end per-app password modal ===== -->
 
 <div class="wrap">
 
@@ -220,7 +210,7 @@ const TILES = [
     desc:"Day-by-day trip companions — maps, timelines, and plans. More destinations coming.",
     type:"menu",
     items:[
-      { flag:"🇮🇸", name:"Iceland — South Coast", sub:"5-day trip companion", href:"vacations/iceland/", status:"live" }
+      { id:"iceland", flag:"🇮🇸", name:"Iceland — South Coast", sub:"5-day trip companion", href:"vacations/iceland/", status:"live", locked:true }
       // add future itineraries here, e.g.
       // { flag:"🇮🇹", name:"Italy — Amalfi Coast", sub:"coming soon", href:"", status:"soon" }
     ]
@@ -229,19 +219,19 @@ const TILES = [
     id:"quado", cls:"t-quado", icon:"🌿",
     title:"Quado", kicker:"Compliance",
     desc:"Environmental compliance manager for oil & gas — EPA OOOO rule family, built from your asset hierarchy.",
-    href:"https://quado.tripiandkayshewa.com", status:"live"
+    href:"https://quado.tripiandkayshewa.com", status:"live", locked:true
   },
   {
     id:"c3", cls:"t-c3", icon:"📈",
     title:"C3.ai Dashboard", kicker:"Markets",
     desc:"A live research dashboard for C3.ai (NYSE: AI) — price, technicals, filings, news, and a forecast.",
-    href:"https://c3.tripiandkayshewa.com", status:"live"
+    href:"https://c3.tripiandkayshewa.com", status:"live", locked:true
   },
   {
     id:"swingbot", cls:"t-swing", icon:"🤖",
     title:"SwingBot", kicker:"Markets",
     desc:"An autonomous long-only swing-trader — a read-only look at how it reads the market regime, gates every trade, and screens its universe. Account balances and controls stay private.",
-    href:"apps/swingbot/", status:"live"
+    href:"apps/swingbot/", status:"live", locked:true
   }
 ];
 
@@ -264,11 +254,12 @@ function tileHTML(t){
     const items = (t.items||[]).map(it => {
       const clickable = it.status === "live" && it.href;
       const tag = clickable ? "a" : "div";
-      const href = clickable ? ` href="${it.href}"` : "";
+      const nav = clickable ? ` href="${it.href}" data-href="${it.href}" data-app="${it.id||it.name}" data-name="${it.name}"${it.locked?' data-locked="1"':''}` : "";
+      const lockPill = clickable && it.locked ? ` <span class="pill private" style="transform:scale(.82)">🔒</span>` : "";
       const arrow = clickable ? `<span class="arrow">${ARROW}</span>` : `<span class="pill soon" style="transform:scale(.9)">soon</span>`;
-      return `<${tag} class="subitem"${href}>
+      return `<${tag} class="subitem"${nav}>
           <span class="flag">${it.flag||"📍"}</span>
-          <span class="st"><b>${it.name}</b><span>${it.sub||""}</span></span>
+          <span class="st"><b>${it.name}${lockPill}</b><span>${it.sub||""}</span></span>
           ${arrow}
         </${tag}>`;
     }).join("");
@@ -284,10 +275,10 @@ function tileHTML(t){
   }
 
   const clickable = !!t.href;
-  const goText = t.status === "private" ? "Private" : (t.status === "soon" ? "Not yet live" : "Open");
-  const go = `<span class="go ${clickable?"":"muted"}">${goText} ${clickable?ARROW:""}</span>`;
-  const openAttr = clickable ? ` onclick="location.href='${t.href}'"` : "";
-  return `<div class="card ${clickable?"link":""} ${t.cls}"${openAttr}>
+  const goText = t.status === "private" ? "Private" : (t.status === "soon" ? "Not yet live" : (t.locked ? "Unlock" : "Open"));
+  const go = `<span class="go ${clickable?"":"muted"}">${clickable&&t.locked?"🔒 ":""}${goText} ${clickable?ARROW:""}</span>`;
+  const nav = clickable ? ` data-href="${t.href}" data-app="${t.id}" data-name="${t.title}"${t.locked?' data-locked="1"':''}` : "";
+  return `<div class="card ${clickable?"link":""} ${t.cls}"${nav}>
       ${head}
       <div class="foot">${PILL[t.status]||""}${go}</div>
     </div>`;
@@ -295,6 +286,50 @@ function tileHTML(t){
 
 const grid = document.getElementById("grid");
 grid.innerHTML = TILES.map(tileHTML).join("");
+
+/* ---------- per-app password gate ---------- */
+(function(){
+  var PW = "VHJhc2hDYXQh"; // base64 of the shared app password
+  var lock   = document.getElementById("applock"),
+      form   = document.getElementById("applock-form"),
+      input  = document.getElementById("applock-input"),
+      errBox = document.getElementById("applock-err"),
+      nameEl = document.getElementById("applock-name"),
+      htmlEl = document.documentElement;
+  var pending = null;
+
+  function unlocked(app){ try{ return localStorage.getItem("tk_app_"+app)==="1"; }catch(e){ return false; } }
+  function remember(app){ try{ localStorage.setItem("tk_app_"+app,"1"); }catch(e){} }
+  function closeLock(){ lock.classList.remove("show"); htmlEl.classList.remove("applock-open"); pending=null; }
+  function openLock(name, cb){
+    pending = cb; nameEl.textContent = name || "this app";
+    errBox.textContent = ""; input.value = "";
+    lock.classList.add("show"); htmlEl.classList.add("applock-open");
+    setTimeout(function(){ try{ input.focus(); }catch(e){} }, 30);
+  }
+
+  // click intercept for any tile/link carrying data-href
+  grid.addEventListener("click", function(e){
+    var nav = e.target.closest("[data-href]");
+    if(!nav || !grid.contains(nav)) return;
+    e.preventDefault();
+    var href = nav.getAttribute("data-href"),
+        app  = nav.getAttribute("data-app"),
+        name = nav.getAttribute("data-name"),
+        locked = nav.hasAttribute("data-locked");
+    if(!locked || unlocked(app)){ location.href = href; return; }
+    openLock(name, function(){ remember(app); location.href = href; });
+  });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(input.value === atob(PW)){ var cb=pending; closeLock(); if(cb) cb(); }
+    else { errBox.textContent = "Incorrect password. Try again."; input.value=""; input.focus(); }
+  });
+  form.querySelector(".applock-x").addEventListener("click", closeLock);
+  lock.addEventListener("click", function(e){ if(e.target === lock) closeLock(); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && lock.classList.contains("show")) closeLock(); });
+})();
 
 // expand/collapse the menu cards
 grid.querySelectorAll('[data-menu]').forEach(card=>{
