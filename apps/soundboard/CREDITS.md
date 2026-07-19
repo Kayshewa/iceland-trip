@@ -13,10 +13,7 @@ Downloaded from https://mixkit.co/free-sound-effects/ and processed locally
 | Button        | File            | Mixkit clip                              |
 |---------------|-----------------|------------------------------------------|
 | Magic Wand    | magic-wand.wav  | "Fairy magic sparkle"                    |
-| Laughter      | laughter.wav    | "Big crowd laughing" (trimmed)           |
 | Applause      | applause.wav    | "Medium size crowd applause" (trimmed)   |
-| Cheer         | cheer.wav       | "Loud children crowd outdoors" (trimmed) |
-| Correct!      | ding.wav        | "Game level completed"                   |
 | Wrong!        | buzzer.wav      | "Trombone disappoint" (sad trombone)     |
 | Drumroll      | drumroll.wav    | "Drum Roll" (trimmed)                     |
 | Pop           | pop.wav         | "Long pop"                               |
@@ -26,14 +23,27 @@ and non-commercial projects, no attribution required; do not resell/redistribute
 sound effects as standalone files or as a competing sound-effects library. Using them
 as button sounds inside this classroom app is within the license.
 
+## Teacher-provided (supplied by the classroom owner, 2026-07-19)
+
+Downloaded by the teacher and imported (converted to mono 16-bit WAV, loudness-matched).
+Original source/license of these is the teacher's responsibility — used here for their
+own classroom:
+
+| Button      | File          | Original download filename                 |
+|-------------|---------------|--------------------------------------------|
+| Dun Dun Dun | dramatic.wav  | dun-dun-dun-sound-effect-brass_8nFBccR.mp3 |
+| Cheer       | cheer.wav     | kids_cheering.mp3                          |
+| Correct!    | ding.wav      | correct.mp3                                |
+| Laughter    | laughter.wav  | laugh-track-2-mp3cut.mp3                   |
+| Ba-Dum-Tss  | rimshot.wav   | ba-dum-tss_6.mp3                           |
+
 ## Original — procedurally generated (public domain / original work)
 
 Synthesized from scratch (numpy) for this app; no license restrictions:
 
-`dramatic.wav` (Dun Dun Dun — classic three-hit orchestral sting), `rimshot.wav`
-(Ba-Dum-Tss — classic snare-snare-cymbal), `crickets.wav`, `tada.wav` (Ta-Da!),
-`bell.wav` (Attention), `countdown.wav`, `chime.wav` (Clean-Up),
-`cash-register.wav` (Ka-Ching), `order-up.wav` (Order Up!), `timer.wav` (Timer's Up).
+`crickets.wav`, `tada.wav` (Ta-Da!), `bell.wav` (Attention), `countdown.wav`,
+`chime.wav` (Clean-Up), `cash-register.wav` (Ka-Ching), `order-up.wav` (Order Up!),
+`timer.wav` (Timer's Up).
 
 (Boing and Whoosh were removed at the teacher's request.)
 
