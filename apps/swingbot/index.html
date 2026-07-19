@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SwingBot — Strategy Showcase</title>
+<meta name="description" content="A read-only public view of SwingBot — an autonomous long-only swing-trading strategy: how it reads the market regime, gates every trade, and screens its universe."/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0c1018; --panel:#141a24; --panel2:#1b2330; --line:#243042; --text:#e6edf6;
+    --muted:#8a98ac; --green:#2ec27e; --red:#ff5d6c; --amber:#f0b429; --blue:#4f9dff;
+    --accent:#6ea8fe;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:10;flex-wrap:wrap}
+  h1{font-size:17px;margin:0;letter-spacing:.3px}
+  h1 .bot{color:var(--accent)}
+  .home{font-size:12px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:6px 11px;white-space:nowrap}
+  .home:hover{border-color:var(--accent);color:var(--text)}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .pill{font-size:12px;padding:4px 10px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .pill b{color:var(--text);font-weight:600}
+  .pill.bull{color:var(--green);border-color:#1f6e4d}
+  .pill.bear{color:var(--red);border-color:#7a2730}
+  .pill.caution{color:var(--amber);border-color:#7a5d18}
+  .pill.paper{color:var(--blue);border-color:#27507f}
+  .pill.ro{color:var(--muted);border-color:var(--line)}
+  .spacer{flex:1}
+  .banner{max-width:1500px;margin:14px auto 0;padding:0 20px}
+  .banner .box{display:flex;gap:10px;align-items:flex-start;background:rgba(110,168,254,.08);border:1px solid #27507f;border-radius:10px;padding:10px 14px;font-size:12.5px;color:var(--text);line-height:1.45}
+  .banner .box b{color:var(--accent)}
+  main{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;padding:16px 20px;max-width:1500px;margin:0 auto}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:0 0 10px}
+  .full{grid-column:1 / -1}
+  .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .big{font-size:26px;font-weight:700}
+  .delta{font-size:13px;font-weight:600}
+  .pos{color:var(--green)} .neg{color:var(--red)} .mut{color:var(--muted)}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .seg button{border:0;border-radius:0;background:transparent;padding:5px 11px;font-size:12px;color:var(--text);cursor:pointer}
+  .seg button.active{background:var(--panel2);color:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:right;padding:6px 8px;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  th{color:var(--muted);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+  tbody tr:hover{background:var(--panel2)}
+  .tag{font-size:11px;padding:1px 7px;border-radius:6px;background:var(--panel2);color:var(--muted)}
+  .kv{display:flex;flex-direction:column;gap:2px}
+  /* waterfall */
+  .wf-row{display:flex;align-items:center;gap:10px;margin:5px 0}
+  .wf-label{width:160px;font-size:12px;color:var(--text);flex:none}
+  .wf-bar-wrap{flex:1;display:flex;align-items:center;background:var(--panel2);border-radius:6px;height:26px;position:relative;overflow:hidden}
+  .wf-bar{height:100%;background:linear-gradient(90deg,#1d6feb,#4f9dff);display:flex;align-items:center;padding:0 8px;font-size:12px;font-weight:600;color:#fff;border-radius:6px;transition:width .4s;flex:none;box-sizing:border-box;min-width:22px}
+  .wf-surv{flex:1;min-width:0;display:flex;align-items:center;gap:5px;padding:0 8px;overflow:hidden;white-space:nowrap;cursor:help}
+  .wf-surv-tk{font-size:11px;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:1px 6px;flex:none}
+  .wf-surv-tk b{color:var(--accent);font-weight:600}
+  .wf-surv-tk .sc{color:var(--muted);margin-left:5px}
+  .wf-surv-tk.skip{color:var(--amber);border-color:#7a5d18;background:rgba(240,180,41,.08)}
+  .wf-surv-tk.skip b{color:var(--amber)}
+  .wf-surv-more{font-size:11px;color:var(--muted);flex:none}
+  .wf-drop{width:78px;flex:none;text-align:right;font-size:12px;color:var(--red);cursor:help}
+  .wf-drop.zero{color:var(--muted)}
+  .muted-note{color:var(--muted);font-size:12px;padding:8px 0}
+  .empty{color:var(--muted);text-align:center;padding:26px 0;font-size:13px}
+  /* screener */
+  .screen-crit{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:2px 0 12px;border-bottom:1px solid var(--line);margin-bottom:10px}
+  .crit-chip{font-size:12px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+  .crit-chip b{color:var(--text)}
+  #screen-table{max-height:460px;overflow:auto}
+  .st-in{color:var(--green)} .st-out{color:var(--red)}
+  tr.row-out td{opacity:.72}
+  .badge-forced{font-size:10px;padding:1px 5px;border-radius:5px;background:#3a2d12;color:var(--amber);margin-left:6px}
+  /* regime modal */
+  #regime-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+  #regime-modal .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;max-width:620px;width:92%;max-height:88vh;overflow:auto}
+  #regime-modal h3{margin:0 0 2px;font-size:18px}
+  #regime-modal button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:5px 10px}
+  .rg-sub{color:var(--muted);font-size:12px;margin-bottom:14px}
+  .rg-scorebar{position:relative;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line);display:flex;margin:4px 0 6px}
+  .rg-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#0c1018cc}
+  .rg-seg.bear{background:rgba(255,93,108,.5)} .rg-seg.caution{background:rgba(240,180,41,.5)} .rg-seg.bull{background:rgba(46,194,126,.5)}
+  .rg-marker{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--text);box-shadow:0 0 0 2px var(--panel)}
+  .rg-legend{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-bottom:14px}
+  table.rg-factors td,table.rg-factors th{padding:6px 8px}
+  table.rg-factors td.rg-detail{text-align:left;color:var(--text)}
+  .rg-vote{font-weight:700;width:34px;text-align:center;border-radius:6px;display:inline-block;padding:1px 0}
+  .rg-vote.up{color:var(--green);background:rgba(46,194,126,.12)}
+  .rg-vote.flat{color:var(--muted);background:var(--panel2)}
+  .rg-vote.down{color:var(--red);background:rgba(255,93,108,.12)}
+  .rg-macro{margin-top:12px;padding:10px 12px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);font-size:12.5px;color:var(--text)}
+  .rg-macro b{color:var(--amber)}
+  .pill.clickable{cursor:pointer}
+  .pill.clickable:hover{border-color:var(--accent)}
+  /* ML-gate detail modal */
+  #mlgate-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+  #mlgate-modal .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;max-width:740px;width:94%;max-height:88vh;overflow:auto}
+  #mlgate-modal button,#score-modal button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:5px 10px}
+  .mlg-chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 12px}
+  .mlg-chip{font-size:12px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);color:var(--muted)}
+  .mlg-chip b{color:var(--text)}
+  .mlg-chip.pass{color:var(--green);border-color:#1f6e4d}
+  .mlg-chip.conf{color:var(--amber);border-color:#7a5d18}
+  .mlg-chip.margin{color:var(--red);border-color:#7a2730}
+  .mlg-edge{font-size:12px;padding:8px 11px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-bottom:12px;line-height:1.4}
+  .mlg-edge b{color:var(--amber)}
+  .plbar{position:relative;width:86px;height:12px;border-radius:4px;background:var(--panel2);border:1px solid var(--line);display:inline-block;vertical-align:middle;overflow:hidden}
+  .plbar .fill{position:absolute;left:0;top:0;bottom:0;background:#4f9dff}
+  .plbar .tick{position:absolute;top:-1px;bottom:-1px;width:2px;background:var(--text);opacity:.75}
+  .mlg-out{font-size:11px;padding:1px 7px;border-radius:6px;white-space:nowrap}
+  .mlg-out.pass{background:rgba(46,194,126,.14);color:var(--green)}
+  .mlg-out.conf_fail{background:rgba(240,180,41,.14);color:var(--amber)}
+  .mlg-out.margin_fail{background:rgba(255,93,108,.12);color:var(--red)}
+  .mlg-out.skipped_earnings{background:var(--panel2);color:var(--muted)}
+  .sig-long{color:var(--green)} .sig-short{color:var(--red)} .sig-hold{color:var(--muted)}
+  /* score-detail modal */
+  #score-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:50}
+  #score-modal .box{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;max-width:780px;width:94%;max-height:88vh;overflow:auto}
+  .sc-card{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:12px;background:var(--panel2)}
+  .sc-card.pass{border-color:#1f6e4d} .sc-card.block{border-color:#7a2730}
+  .sc-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .sc-head .tk{font-size:15px;font-weight:700}
+  .sc-total{font-size:13px}
+  .sc-total b{font-size:16px}
+  .sc-verdict{font-size:11px;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .sc-verdict.pass{background:rgba(46,194,126,.14);color:var(--green)}
+  .sc-verdict.block{background:rgba(255,93,108,.12);color:var(--red)}
+  table.sc-comp{width:100%;border-collapse:collapse;font-size:12.5px}
+  table.sc-comp td{padding:3px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  table.sc-comp tr:last-child td{border-bottom:none}
+  .sc-pts{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;width:52px}
+  .sc-pts.on{color:var(--green);font-weight:600} .sc-pts.off{color:var(--muted)} .sc-pts.pen{color:var(--red);font-weight:600}
+  .sc-why{color:var(--muted)}
+  .sc-name{white-space:nowrap}
+  .wf-row.clickable{cursor:pointer;border-radius:6px}
+  .wf-row.clickable:hover .wf-label{color:var(--accent)}
+  /* gate chain */
+  .gate-banner{display:flex;align-items:center;gap:8px;padding:9px 13px;border-radius:8px;font-size:13px;font-weight:600;margin-bottom:14px}
+  .gate-banner.open{background:rgba(46,194,126,.12);border:1px solid #1f6e4d;color:var(--green)}
+  .gate-banner.closed{background:rgba(255,93,108,.1);border:1px solid #7a2730;color:var(--red)}
+  .gate-tier-label{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:4px 0 8px}
+  .gate-port{display:flex;gap:0;flex-wrap:wrap;align-items:stretch;margin-bottom:18px}
+  .gate-chip{flex:1;min-width:150px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;position:relative}
+  .gate-chip + .gate-chip{margin-left:26px}
+  .gate-chip + .gate-chip::before{content:"→";position:absolute;left:-21px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px}
+  .gate-chip.open{border-color:#1f6e4d}
+  .gate-chip.blocked{border-color:#7a2730;box-shadow:0 0 0 1px #7a2730}
+  .gate-chip .gc-top{display:flex;align-items:center;gap:7px;font-weight:600;font-size:13px}
+  .gate-chip .gc-status{margin-left:auto;font-size:11px;padding:1px 7px;border-radius:6px}
+  .gc-status.open{background:rgba(46,194,126,.14);color:var(--green)}
+  .gc-status.blocked{background:rgba(255,93,108,.14);color:var(--red)}
+  .gate-chip .gc-crit{color:var(--muted);font-size:11.5px;margin-top:5px;line-height:1.35}
+  .gate-chip .gc-detail{font-size:11px;margin-top:5px;color:var(--text)}
+  .gate-list{display:flex;flex-direction:column;gap:0}
+  .gate-row{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);position:relative}
+  .gate-row:last-child{border-bottom:0}
+  .gate-num{width:22px;height:22px;flex:none;border-radius:50%;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);margin-top:1px}
+  .gate-row.pass .gate-num{border-color:#1f6e4d;color:var(--green)}
+  .gate-row.blocked .gate-num{border-color:#7a2730;color:var(--red)}
+  .gate-row.idle{opacity:.5}
+  .gate-main{flex:1;min-width:0}
+  .gate-name{font-size:13px;font-weight:600}
+  .gate-crit{color:var(--muted);font-size:12px;margin-top:2px}
+  .gate-count{flex:none;text-align:right;font-size:12px;min-width:92px}
+  .gate-count .n{font-weight:700;font-size:15px}
+  .gate-count.pass .n{color:var(--green)} .gate-count.blocked .n{color:var(--red)} .gate-count.idle .n{color:var(--muted)}
+  .gate-count .lbl{color:var(--muted);font-size:11px;display:block}
+  .gate-entered{margin-top:12px;padding:11px 14px;border-radius:10px;background:rgba(46,194,126,.1);border:1px solid #1f6e4d;display:flex;align-items:center;gap:10px;font-weight:600}
+  .gate-entered .n{font-size:18px;color:var(--green)}
+  .foot{padding:6px 20px 24px;color:var(--muted);font-size:11px;text-align:center;line-height:1.6}
+  @media(max-width:820px){ main{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Swing<span class="bot">Bot</span></h1>
+  <div class="pills" id="pills"></div>
+  <div class="spacer"></div>
+  <a class="home" href="/">← All apps</a>
+</header>
+
+<div class="banner"><div class="box">
+  🔒 <div><b>Read-only public view.</b> This is a live look at how SwingBot's engine thinks —
+  its market-regime read, the gate chain every trade must clear, the screening waterfall, and the
+  fundamental screener. Real account balances, individual holdings, and all trading controls stay
+  private; performance here is shown as a percentage return only.</div>
+</div></div>
+
+<main>
+  <section class="card full">
+    <div class="row">
+      <h2>Performance (indexed to 100)</h2>
+      <div class="seg">
+        <button id="v-forward" class="active" onclick="setView('forward')">Live forward</button>
+        <button id="v-backtest" onclick="setView('backtest')">Backtest ’23–’24</button>
+      </div>
+    </div>
+    <div class="row" style="margin:4px 0 10px">
+      <div><span class="mut">Strategy (mark-to-market)</span> <span id="strat-ret" class="big">—</span></div>
+      <div><span class="mut">Realized (banked)</span> <span id="real-ret" class="delta">—</span></div>
+      <div><span class="mut">S&amp;P 500</span> <span id="bench-ret" class="delta mut">—</span></div>
+    </div>
+    <canvas id="perf-chart" height="92"></canvas>
+    <div class="muted-note" id="perf-note"></div>
+  </section>
+
+  <section class="card">
+    <h2>Strategy status</h2>
+    <div class="row">
+      <div class="kv"><div class="mut">Market regime</div><div class="big" id="ss-regime">—</div></div>
+      <div class="kv" style="text-align:right"><div class="mut">Open positions</div><div class="big" id="ss-pos">—</div></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <div class="kv"><div class="mut">Capital deployed</div><div class="delta" id="ss-deployed">—</div></div>
+      <div class="kv" style="text-align:right"><div class="mut">Sessions logged</div><div class="delta" id="ss-sessions">—</div></div>
+    </div>
+    <div class="muted-note" id="ss-note"></div>
+  </section>
+
+  <section class="card">
+    <h2>Recent trades</h2>
+    <div id="trades"></div>
+  </section>
+
+  <section class="card full">
+    <div class="row"><h2>Trade gate chain — every check before a trade opens</h2>
+      <span class="tag" id="gates-date"></span></div>
+    <div id="gate-banner"></div>
+    <div class="gate-tier-label">Portfolio gates — checked once per cycle · one closed gate blocks every trade</div>
+    <div class="gate-port" id="gate-port"></div>
+    <div class="gate-tier-label">Per-candidate gates — each name must clear all of these, in order</div>
+    <div class="gate-list" id="gate-list"></div>
+    <div id="gate-entered"></div>
+  </section>
+
+  <section class="card full">
+    <div class="row"><h2>Screening waterfall — what's eliminated along the way</h2>
+      <span class="tag" id="funnel-date"></span></div>
+    <div id="waterfall"></div>
+  </section>
+
+  <section class="card full">
+    <div class="row"><h2>Fundamental screener — included vs excluded</h2>
+      <span class="tag" id="screen-summary"></span></div>
+    <div class="screen-crit" id="screen-crit"></div>
+    <div id="screen-table"></div>
+    <div class="muted-note">Green = the bot would consider it; red = excluded (reason shown). These are the same criteria the bot screens on. In the private control app these thresholds are tunable; here they are shown read-only.</div>
+  </section>
+</main>
+
+<div id="regime-modal" onclick="if(event.target.id==='regime-modal')closeRegime()">
+  <div class="box">
+    <div class="row"><h3 id="rg-title">Regime</h3><button onclick="closeRegime()">✕</button></div>
+    <div class="rg-sub" id="rg-sub"></div>
+    <div class="rg-scorebar" id="rg-scorebar"></div>
+    <div class="rg-legend" id="rg-legend"></div>
+    <div id="rg-body"></div>
+    <div id="rg-macro"></div>
+  </div>
+</div>
+
+<div id="mlgate-modal" onclick="if(event.target.id==='mlgate-modal')closeMlGate()">
+  <div class="box">
+    <div class="row"><h3 style="margin:0">Inside the ML gate</h3><button onclick="closeMlGate()">✕</button></div>
+    <div class="rg-sub" id="mlg-sub"></div>
+    <div class="mlg-chips" id="mlg-chips"></div>
+    <div class="mlg-edge" id="mlg-edge"></div>
+    <div id="mlg-body"></div>
+  </div>
+</div>
+
+<div id="score-modal" onclick="if(event.target.id==='score-modal')closeScore()">
+  <div class="box">
+    <div class="row"><h3 style="margin:0">Inside the min-score gate</h3><button onclick="closeScore()">✕</button></div>
+    <div class="rg-sub" id="sc-sub"></div>
+    <div class="mlg-chips" id="sc-chips"></div>
+    <div id="sc-body"></div>
+  </div>
+</div>
+
+<div class="foot">
+  <div>SwingBot · public read-only showcase · <a href="/" style="color:var(--muted)">tripiandkayshewa.com</a></div>
+  <div id="foot-stamp"></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const pct = v => v==null ? '—' : (v>=0?'+':'')+(v*100).toFixed(2)+'%';
+const cls = v => v==null?'mut':(v>=0?'pos':'neg');
+let view='forward', perfChart=null, SNAP=null;
+
+function regimeClass(r){return r==='BULL'?'bull':r==='BEAR'?'bear':r==='CAUTION'?'caution':''}
+
+// ---- status pills + strategy-status card ----
+function renderStatus(){
+  const s = (SNAP&&SNAP.status)||{};
+  $('#pills').innerHTML = [
+    `<span class="pill paper"><b>${s.mode||'PAPER'}</b> mode</span>`,
+    `<span class="pill clickable ${regimeClass(s.regime)}" onclick="openRegime()" title="Click for the factor breakdown">Regime <b>${s.regime||'—'}</b> ⓘ</span>`,
+    `<span class="pill">Positions <b>${s.position_count??'—'}/${s.max_positions??'—'}</b></span>`,
+    `<span class="pill">Last cycle <b>${s.last_run_date||'never'}</b></span>`,
+    `<span class="pill ro">read-only</span>`,
+  ].join('');
+  $('#ss-regime').textContent = s.regime||'—';
+  $('#ss-regime').className = 'big '+ (s.regime==='BULL'?'pos':s.regime==='BEAR'?'neg':'');
+  $('#ss-pos').textContent = (s.position_count??'—')+' / '+(s.max_positions??'—');
+  $('#ss-deployed').textContent = s.deployed_pct==null ? '—' : s.deployed_pct+'%';
+  $('#ss-sessions').textContent = s.sessions??'—';
+  $('#ss-note').textContent = 'Position count and deployed-capital % only — individual holdings and dollar balances are private.';
+}
+
+// ---- performance (indexed to 100) ----
+function renderPerf(){
+  const d = ((SNAP&&SNAP.performance)||{})[view] || {dates:[],strategy:[],benchmark:[],realized:[]};
+  $('#strat-ret').textContent = pct(d.strategy_return);
+  $('#strat-ret').className = 'big '+cls(d.strategy_return);
+  $('#real-ret').textContent = pct(d.realized_return);
+  $('#real-ret').className = 'delta '+cls(d.realized_return);
+  $('#bench-ret').textContent = pct(d.benchmark_return);
+  $('#bench-ret').className = 'delta '+cls(d.benchmark_return);
+  const hasBench = (d.benchmark||[]).some(v=>v!=null);
+  $('#perf-note').textContent = (d.dates||[]).length<2
+    ? `${d.label||''}: ${(d.dates||[]).length} session so far — the curve fills in as the bot runs daily.`
+    : `${d.label||''} · ${d.dates.length} sessions · indexed to 100 at the first session (no dollar balances shown). `
+      + `Green = realized P&L (banked on closed trades; never falls under no-loss-hold). Blue dips are unrealized — positions held through a drawdown, not losses taken.`
+      + (hasBench?'':' · S&P 500 line unavailable in this snapshot.');
+  const ds = {labels:d.dates, datasets:[
+    {label:'Strategy (mark-to-market)', data:d.strategy, borderColor:'#4f9dff', backgroundColor:'rgba(79,157,255,.12)', fill:true, tension:.2, pointRadius:(d.dates||[]).length<40?3:0, borderWidth:2},
+    {label:'Realized (banked)', data:d.realized, borderColor:'#2ec27e', fill:false, stepped:true, pointRadius:0, borderWidth:2},
+    {label:'S&P 500', data:d.benchmark, borderColor:'#8a98ac', borderDash:[5,4], fill:false, tension:.2, pointRadius:0, borderWidth:1.5},
+  ]};
+  const opts={responsive:true, interaction:{mode:'index',intersect:false}, plugins:{legend:{labels:{color:'#8a98ac',boxWidth:12}}},
+    scales:{x:{ticks:{color:'#8a98ac',maxTicksLimit:8},grid:{color:'#1b2330'}},
+            y:{ticks:{color:'#8a98ac',callback:v=>Number(v).toFixed(0)},grid:{color:'#1b2330'}}}};
+  if(perfChart){perfChart.data=ds;perfChart.options=opts;perfChart.update();}
+  else perfChart=new Chart($('#perf-chart'),{type:'line',data:ds,options:opts});
+}
+
+// ---- recent trades (percentage only) ----
+function renderTrades(){
+  const t=(SNAP&&SNAP.trades)||[];
+  $('#trades').innerHTML = t.length? '<table><thead><tr><th>Ticker</th><th>Exit</th><th>Return</th><th>Held</th><th>Reason</th></tr></thead><tbody>'+
+    t.map(r=>`<tr><td><b>${r.ticker}</b></td><td class="mut">${r.exit_date||''}</td><td class="${cls(r.pnl_pct)}">${pct(r.pnl_pct)}</td><td class="mut">${r.hold_days??'—'}d</td><td><span class="tag">${r.exit_reason||''}</span></td></tr>`).join('')+'</tbody></table>'
+    : '<div class="empty">No closed trades yet — the forward test just started. Entries need 3+ sessions and a BULL regime.</div>';
+}
+
+// ---- screening waterfall ----
+let lastFunnel=null;
+function renderFunnel(){
+  const f = (SNAP&&SNAP.funnel)||{}; lastFunnel=f;
+  $('#funnel-date').textContent = f.date? ('cycle '+f.date+' · '+(f.regime||'')) : '';
+  const stages=f.stages||[];
+  if(!stages.length){$('#waterfall').innerHTML='<div class="empty">No funnel in this snapshot yet.</div>';return;}
+  const max = Math.max(...stages.map(s=>s.count),1);
+  const scores = f.scores||{};
+  const eSkip = new Set((((f.ml_gate||{}).rows)||[]).filter(r=>r.outcome==='skipped_earnings').map(r=>r.ticker));
+  $('#waterfall').innerHTML = stages.map(s=>{
+    const w = Math.max(2, s.count/max*100);
+    const elim = s.eliminated||[];
+    const tip = elim.length? (s.eliminated_reason? s.eliminated_reason+': ':'')+elim.join(', ') : 'none eliminated here';
+    const mlg = s.stage==='ml_gate';
+    const scg = s.stage==='score' && ((f.score_detail||{}).arrived);
+    const surv = s.survivors||[];
+    const withScore = surv.length<=6;
+    const shown = surv.slice(0,14);
+    const chips = shown.map(t=>{
+      const skip = eSkip.has(t);
+      const sc = withScore && scores[t]!=null ? `<span class="sc">${scores[t].toFixed(1)}</span>` : '';
+      return `<span class="wf-surv-tk${skip?' skip':''}"${skip?' title="held out — earnings imminent; not a live entry candidate this cycle"':''}><b>${t}</b>${skip?' ⏸':''}${sc}</span>`;
+    }).join('');
+    const more = surv.length>shown.length ? `<span class="wf-surv-more">+${surv.length-shown.length} more</span>` : '';
+    const survTip = surv.length? (surv.length+' remaining: '+surv.map(t=>eSkip.has(t)?t+' (earnings hold)':t).join(', ')) : 'none remaining here';
+    const clk = mlg || scg;
+    const onc = mlg?' onclick="openMlGate()"':scg?' onclick="openScore()"':'';
+    return `<div class="wf-row${clk?' clickable':''}"${onc}>
+      <div class="wf-label">${s.label}${clk?' ⓘ':''}</div>
+      <div class="wf-bar-wrap"><div class="wf-bar" style="width:${w}%">${s.count}</div><div class="wf-surv" title="${survTip.replace(/"/g,'&quot;')}">${chips}${more}</div></div>
+      <div class="wf-drop ${elim.length?'':'zero'}" title="${tip.replace(/"/g,'&quot;')}">${elim.length?('−'+elim.length):'·'}</div>
+    </div>`;
+  }).join('');
+}
+
+// --- ML-gate detail modal ---
+function openMlGate(){
+  $('#mlgate-modal').style.display='flex';
+  const d = (lastFunnel||{}).ml_gate;
+  if(!d){
+    $('#mlg-sub').textContent='This cycle was recorded before the gate-transparency upgrade — the per-name breakdown appears after the next cycle runs.';
+    $('#mlg-chips').innerHTML=''; $('#mlg-edge').innerHTML=''; $('#mlg-body').innerHTML='';
+    return;
+  }
+  const confMin=d.conf_min??0.5, mMin=d.margin_min??0.15;
+  $('#mlg-sub').innerHTML = `The gate applies <b>two tests</b> to every arrival: the ensemble must read <b>LONG</b> — `
+    + `which happens only when P(long) − P(short) &gt; ${mMin} (the “margin”) — and P(long) must clear the `
+    + `<b>${confMin}</b> confidence floor.` + (lastFunnel.date? ` · cycle ${lastFunnel.date}`:'');
+  if(!d.arrived){
+    $('#mlg-chips').innerHTML=''; $('#mlg-edge').innerHTML='';
+    $('#mlg-body').innerHTML='<div class="empty">No candidates reached the ML gate this cycle (blocked upstream — regime/watchlist/data).</div>';
+    return;
+  }
+  const chips=[
+    `<span class="mlg-chip"><b>${d.arrived}</b> arrived</span>`,
+    `<span class="mlg-chip pass"><b>${d.passed}</b> passed</span>`,
+    `<span class="mlg-chip conf"><b>${d.conf_fail}</b> LONG but P(long) &lt; ${confMin}</span>`,
+    `<span class="mlg-chip margin"><b>${d.margin_fail}</b> not LONG — margin ≤ ${mMin}</span>`,
+  ];
+  if(d.skipped_earnings) chips.push(`<span class="mlg-chip"><b>${d.skipped_earnings}</b> skipped — earnings imminent</span>`);
+  $('#mlg-chips').innerHTML = chips.join('');
+  $('#mlg-edge').innerHTML = d.edge_confirmed
+    ? `Model edge this train: <span class="pos">confirmed</span> — at least one model beat its baseline by ≥ 2 pts out-of-sample.`
+    : `Model edge this train: <b>UNCONFIRMED</b> — no model beat its baseline by ≥ 2 pts, so the ML block’s score contribution is capped. `
+      + `Broad low-conviction days (small margins across the board) are normal, and sparse entries are the validated profile — not a fault.`;
+  const OUT={pass:'✓ pass', conf_fail:`P(long) < ${confMin}`, margin_fail:'not LONG', skipped_earnings:'earnings skip'};
+  const sigCls = s => s==='LONG'?'sig-long':s==='SHORT'?'sig-short':'sig-hold';
+  const body=(d.rows||[]).map(r=>{
+    const bar=`<span class="plbar"><span class="fill" style="width:${Math.min(100,Math.max(0,r.prob_long*100))}%"></span><span class="tick" style="left:${confMin*100}%"></span></span>`;
+    const mg=r.margin, mgTxt = mg==null?'—':(mg>=0?'+':'')+mg.toFixed(3);
+    const mgCls = mg==null?'mut':(mg>mMin?'pos':'neg');
+    return `<tr><td><b>${r.ticker}</b></td><td class="${sigCls(r.signal)}">${r.signal}</td>
+      <td style="white-space:nowrap">${bar} ${r.prob_long.toFixed(3)}</td>
+      <td>${r.prob_short==null?'—':r.prob_short.toFixed(3)}</td>
+      <td class="${mgCls}">${mgTxt}</td>
+      <td>${OUT[r.outcome]?`<span class="mlg-out ${r.outcome}">${OUT[r.outcome]}</span>`:r.outcome}</td></tr>`;
+  }).join('');
+  $('#mlg-body').innerHTML = `<table><thead><tr><th>Ticker</th><th>Signal</th>`
+    + `<th>P(long) · tick = ${confMin} floor</th><th>P(short)</th><th>Margin · needs &gt; ${mMin}</th><th>Verdict</th></tr></thead>`
+    + `<tbody>${body}</tbody></table>`
+    + `<div class="muted-note">Sorted by margin (strongest conviction first). “Not LONG” means the ensemble’s LONG-vs-SHORT `
+    + `margin was too small to read as a LONG signal at all — the most common outcome on low-conviction days.</div>`;
+}
+function closeMlGate(){$('#mlgate-modal').style.display='none';}
+
+// --- min-score detail modal ---
+const SC_COMPONENTS = {
+  ml_signal:      {label:'ML signal block',        why:'ensemble conviction (capped so it can’t dominate)', max:3.5},
+  fundamental:    {label:'Fundamental quality',     why:'EDGAR trailing quality score tier',                 max:2.0},
+  rsi:            {label:'RSI in 40–65 band',        why:'momentum not overbought/oversold',                  max:0.5},
+  macd:           {label:'MACD bullish',             why:'MACD line above signal',                            max:0.5},
+  price_vs_20sma: {label:'Price > 20-day SMA',        why:'trading above its short trend',                    max:0.5},
+  volume:         {label:'Volume above average',      why:'participation confirming the move',                max:0.5},
+  earnings:       {label:'Earnings catalyst',         why:'a supportive earnings event in window',            max:0.5},
+  scanner:        {label:'Scanner trigger',           why:'surfaced by the discovery scan',                   max:0.5},
+  insider:        {label:'Insider buying',            why:'notable net insider buying (MSPR > 50)',           max:0.5},
+  no_disagreement:{label:'Model agreement',           why:'ensemble members not in high disagreement',        max:0.5},
+  mtf_alignment:  {label:'Multi-timeframe aligned',   why:'signal agrees across timeframes',                  max:0.5},
+  regime_bonus:   {label:'Regime bonus (BULL)',       why:'entered on a BULL day',                             max:1.0},
+  news:           {label:'News score',                why:'weight 0.0 since Jul 2026 — kept as a guard only', max:0.0},
+  allocation:     {label:'Sector allocation',         why:'under/overweight & OTHER/TECH adjustments',        max:null},
+};
+function openScore(){
+  $('#score-modal').style.display='flex';
+  const d = (lastFunnel||{}).score_detail;
+  if(!d){
+    $('#sc-sub').textContent='This cycle was recorded before the score-transparency upgrade — the per-name breakdown appears after the next cycle runs.';
+    $('#sc-chips').innerHTML=''; $('#sc-body').innerHTML=''; return;
+  }
+  const min=d.min_entry??4, cap=d.cap??10, ovr=d.override_threshold??8;
+  $('#sc-sub').innerHTML = `Every name that cleared the ML gate is scored on the §11 points table; it must reach `
+    + `<b>${(+min).toFixed(1)}</b> (capped at ${(+cap).toFixed(0)}) to be tradeable. A sector <b>penalty</b> only proceeds if the raw `
+    + `score clears the <b>${(+ovr).toFixed(1)}</b> override.` + (lastFunnel.date? ` · cycle ${lastFunnel.date}`:'');
+  if(!d.arrived){
+    $('#sc-chips').innerHTML='';
+    $('#sc-body').innerHTML='<div class="empty">No candidates reached the scoring stage this cycle (all blocked upstream — regime/watchlist/ML gate).</div>';
+    return;
+  }
+  $('#sc-chips').innerHTML = [
+    `<span class="mlg-chip"><b>${d.arrived}</b> scored</span>`,
+    `<span class="mlg-chip pass"><b>${d.passed}</b> cleared ${(+min).toFixed(1)}</span>`,
+    `<span class="mlg-chip margin"><b>${d.blocked}</b> below min / capped</span>`,
+  ].join('');
+  const REASON={below_min_entry_score:`score < ${(+min).toFixed(1)}`, tech_hard_cap:'TECH position cap full',
+    not_long_signal:'ensemble not LONG', allocation_penalty_below_override:`penalized & raw < ${(+ovr).toFixed(1)} override`};
+  $('#sc-body').innerHTML = (d.rows||[]).map(r=>{
+    const comps = r.components||{};
+    const rows = Object.keys(SC_COMPONENTS).filter(k=>k in comps).map(k=>{
+      const m=SC_COMPONENTS[k], v=comps[k];
+      const cc = v>0?'on':v<0?'pen':'off';
+      const maxTxt = (k==='allocation'||m.max==null||m.max===0)?'' : ` <span class="sc-why">/ ${m.max.toFixed(1)}</span>`;
+      const val = (v>=0?'+':'')+v.toFixed(v%1?2:1);
+      const why = k==='allocation'&&r.alloc_state ? `${m.why} — <b>${r.alloc_state.replace(/_/g,' ')}</b>` : m.why;
+      return `<tr><td class="sc-name">${m.label}</td><td class="sc-why">${why}</td>`
+        + `<td class="sc-pts ${cc}">${val}${maxTxt}</td></tr>`;
+    }).join('');
+    const ok=r.tradeable;
+    const verdict = ok ? '✓ tradeable' : (REASON[r.reason]||r.reason||'blocked');
+    const rawNote = (Math.abs(r.raw_score-r.final_score)>1e-9) ? ` <span class="sc-why">(raw ${(r.raw_score>=0?'+':'')+r.raw_score.toFixed(2)}, capped)</span>` : '';
+    return `<div class="sc-card ${ok?'pass':'block'}">
+      <div class="sc-head">
+        <span class="tk">${r.ticker}</span>
+        <span class="sc-total">final <b class="${ok?'pos':'neg'}">${(r.final_score>=0?'+':'')+r.final_score.toFixed(2)}</b>${rawNote}
+          <span class="sc-verdict ${ok?'pass':'block'}">${verdict}</span></span>
+      </div>
+      <table class="sc-comp"><tbody>${rows}</tbody></table>
+    </div>`;
+  }).join('') + `<div class="muted-note">Sorted by final score. Green lines added points, grey lines scored zero `
+    + `(criterion not met), red lines are penalties.</div>`;
+}
+function closeScore(){$('#score-modal').style.display='none';}
+
+// ---- gate chain ----
+function renderGates(){
+  const g = (SNAP&&SNAP.gates)||{};
+  $('#gates-date').textContent = g.date ? ('cycle '+g.date) : '';
+  if(g.note && !(g.portfolio_gates||[]).length){
+    $('#gate-banner').innerHTML=''; $('#gate-port').innerHTML='';
+    $('#gate-list').innerHTML='<div class="empty">'+g.note+'</div>'; $('#gate-entered').innerHTML='';
+    return;
+  }
+  $('#gate-banner').innerHTML = g.entries_open
+    ? `<div class="gate-banner open">✓ Entry path OPEN — candidates are being evaluated against the per-name gates below.</div>`
+    : `<div class="gate-banner closed">⛔ Entry path CLOSED at “${g.blocking_gate||'a portfolio gate'}” — no new trades can open this cycle. Existing positions are still managed.</div>`;
+  $('#gate-port').innerHTML = (g.portfolio_gates||[]).map(p=>`
+    <div class="gate-chip ${p.status}">
+      <div class="gc-top">${p.icon||''} ${p.label}
+        <span class="gc-status ${p.status}">${p.status==='open'?'open':'blocked'}</span></div>
+      <div class="gc-crit">${p.criterion}</div>
+      <div class="gc-detail ${p.status==='blocked'?'neg':'mut'}">${p.detail||''}</div>
+    </div>`).join('');
+  $('#gate-list').innerHTML = (g.candidate_gates||[]).map((c,i)=>{
+    let cnt;
+    if(c.status==='pass') cnt = `<span class="n">${c.survivors}</span><span class="lbl">pass${c.dropped?` · −${c.dropped}`:''}</span>`;
+    else if(c.status==='blocked') cnt = `<span class="n">0</span><span class="lbl">of ${c.survivors+c.dropped} arrived</span>`;
+    else cnt = `<span class="n">—</span><span class="lbl">waiting</span>`;
+    const mark = c.status==='pass'?'✓':c.status==='blocked'?'✕':(i+1);
+    return `<div class="gate-row ${c.status}">
+      <div class="gate-num">${mark}</div>
+      <div class="gate-main"><div class="gate-name">${c.label}</div><div class="gate-crit">${c.criterion}</div></div>
+      <div class="gate-count ${c.status}">${cnt}</div>
+    </div>`;
+  }).join('');
+  $('#gate-entered').innerHTML = g.entries_open
+    ? `<div class="gate-entered">🎯 <span class="n">${g.entered??0}</span> entered this cycle — every gate above cleared.</div>`
+    : '';
+}
+
+// ---- fundamental screener (read-only) ----
+const fnum = (v,dp) => v==null ? '—' : Number(v).toFixed(dp==null?1:dp);
+function renderScreen(){
+  const d = (SNAP&&SNAP.screen)||{config:{thresholds:{}},summary:{},rows:[]};
+  const th = d.config.thresholds||{};
+  const chip = (label,val)=> `<span class="crit-chip">${label} <b>${val}</b></span>`;
+  const crit = [];
+  if(th.require_profitable) crit.push(`<span class="crit-chip"><b>must be profitable</b></span>`);
+  if(th.max_trailing_pe!=null) crit.push(chip('max PE', th.max_trailing_pe));
+  if(th.max_forward_pe!=null) crit.push(chip('max fwd PE', th.max_forward_pe));
+  if(th.max_peg!=null) crit.push(chip('max PEG', th.max_peg));
+  if(th.min_eps_growth!=null) crit.push(chip('min EPS growth', Math.round(th.min_eps_growth*100)+'%'));
+  if(th.min_roe!=null) crit.push(chip('min ROE', Math.round(th.min_roe*100)+'%'));
+  if(th.require_positive_fcf) crit.push(`<span class="crit-chip"><b>positive FCF</b></span>`);
+  if(th.max_debt_to_equity!=null) crit.push(chip('max D/E', th.max_debt_to_equity));
+  $('#screen-crit').innerHTML = crit.join('') || '<span class="crit-chip mut">default criteria</span>';
+  const s=d.summary||{};
+  $('#screen-summary').textContent =
+    `${s.included??0} included · ${s.excluded??0} excluded` +
+    ((s.forced_in||s.forced_out) ? ` · ${s.forced_in} forced in / ${s.forced_out} out` : '');
+  const rows=(d.rows||[]).map(r=>{
+    const badge = r.forced ? `<span class="badge-forced">forced ${r.included?'in':'out'}</span>` : '';
+    const growth = r.eps_growth==null ? '—' : (r.eps_growth*100).toFixed(0)+'%';
+    const roe = r.roe==null ? '—' : (r.roe*100).toFixed(0)+'%';
+    const fcf = r.ttm_fcf==null ? '—' : (r.ttm_fcf/1e9).toFixed(1)+'B';
+    const dte = r.debt_to_equity==null ? '—' : Number(r.debt_to_equity).toFixed(1);
+    return `<tr class="${r.included?'':'row-out'}">
+      <td><b>${r.ticker}</b> ${badge}</td><td class="mut">${r.bucket||''}</td>
+      <td>${fnum(r.trailing_pe,0)}</td><td>${fnum(r.forward_pe,0)}</td><td>${fnum(r.peg,2)}</td><td>${growth}</td><td>${roe}</td><td>${fcf}</td><td>${dte}</td>
+      <td class="${r.included?'st-in':'st-out'}">${r.included?'✓ in':'✗ out'}</td>
+      <td class="mut" style="text-align:left">${r.reason||''}</td></tr>`;
+  }).join('');
+  $('#screen-table').innerHTML = `<table><thead><tr><th>Ticker</th><th>Bucket</th><th>PE</th><th>fwd&nbsp;PE</th><th>PEG</th><th>growth</th><th>ROE</th><th>FCF</th><th>D/E</th><th>status</th><th style="text-align:left">reason</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+// --- regime detail modal ---
+const RG_NAMES = {
+  spx_vs_200sma:'S&P 500 vs 200-day average', spx_vs_50sma:'S&P 500 vs 50-day average',
+  spx_20d_trend:'S&P 500 20-day trend (slope)', ndx_vs_200sma:'Nasdaq-100 vs 200-day average',
+  spx_52wk_pos:'S&P 500 position in 52-week range', breadth:'Market breadth (% above 50-day)',
+  realized_vol:'Realized volatility (20-day)', spx_5d_mom:'S&P 500 5-day momentum',
+};
+const voteCell = v => v>0 ? '<span class="rg-vote up">+1</span>'
+  : v<0 ? '<span class="rg-vote down">−1</span>' : '<span class="rg-vote flat">0</span>';
+
+function openRegime(){
+  $('#regime-modal').style.display='flex';
+  const d = (SNAP&&SNAP.regime)||{};
+  const reg = d.regime;
+  $('#rg-title').textContent = 'Regime: ' + (reg||'—');
+  $('#rg-title').style.color =
+    reg==='BULL'?'var(--green)':reg==='BEAR'?'var(--red)':reg==='CAUTION'?'var(--amber)':'var(--text)';
+  if(!reg){
+    $('#rg-sub').textContent = d.note || 'No regime computed yet.';
+    $('#rg-body').innerHTML=''; $('#rg-macro').innerHTML=''; $('#rg-scorebar').innerHTML=''; $('#rg-legend').innerHTML=''; return;
+  }
+  const max = d.max_score||9.5, th = d.thresholds||{bull_min:5,caution_min:1};
+  const bull=th.bull_min, caut=th.caution_min;
+  $('#rg-sub').innerHTML = `Score <b>${d.score>0?'+':''}${d.score}</b> of ${max} `
+    + `· BULL ≥ ${bull} · CAUTION ≥ ${caut} · else BEAR`
+    + (d.date?` · cycle ${d.date}`:'');
+  const span = 2*max;
+  const wBear=(caut-(-max))/span*100, wCaut=(bull-caut)/span*100, wBull=(max-bull)/span*100;
+  const markerPct = Math.min(100,Math.max(0,(d.score-(-max))/span*100));
+  $('#rg-scorebar').innerHTML =
+    `<div class="rg-seg bear" style="width:${wBear}%">BEAR</div>`+
+    `<div class="rg-seg caution" style="width:${wCaut}%">CAUTION</div>`+
+    `<div class="rg-seg bull" style="width:${wBull}%">BULL</div>`+
+    `<div class="rg-marker" style="left:${markerPct}%" title="score ${d.score}"></div>`;
+  $('#rg-legend').innerHTML = `<span>−${max}</span><span>0</span><span>+${max}</span>`;
+  const factors = d.factors||{};
+  const rows = Object.keys(factors).sort((a,b)=>factors[b].weight-factors[a].weight).map(k=>{
+    const f=factors[k];
+    const cc = f.contribution>0?'pos':f.contribution<0?'neg':'mut';
+    return `<tr>
+      <td class="rg-detail"><b>${RG_NAMES[k]||k}</b><br><span class="mut" style="font-size:12px">${f.detail||''}</span></td>
+      <td>${voteCell(f.value)}</td>
+      <td class="mut">×${f.weight}</td>
+      <td class="${cc}"><b>${f.contribution>0?'+':''}${f.contribution}</b></td>
+    </tr>`;
+  }).join('');
+  $('#rg-body').innerHTML = `<table class="rg-factors"><thead><tr>
+    <th style="text-align:left">Factor</th><th>Vote</th><th>Weight</th><th>Contribution</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr><td style="text-align:right" class="mut">Total score</td><td></td><td></td>
+      <td class="${d.score>0?'pos':d.score<0?'neg':'mut'}"><b>${d.score>0?'+':''}${d.score}</b></td></tr></tfoot>
+    </table>`;
+  if(d.macro_tilt || (d.note && /macro/i.test(d.note||''))){
+    $('#rg-macro').innerHTML = `<div class="rg-macro">🌐 <b>Macro overlay:</b> `
+      + (d.note || `tilt ${d.macro_tilt}`) + `</div>`;
+  } else {
+    $('#rg-macro').innerHTML='';
+  }
+}
+function closeRegime(){$('#regime-modal').style.display='none';}
+
+function setView(v){view=v;$('#v-forward').classList.toggle('active',v==='forward');$('#v-backtest').classList.toggle('active',v==='backtest');renderPerf();}
+
+function renderAll(){renderStatus();renderPerf();renderTrades();renderGates();renderFunnel();renderScreen();
+  $('#foot-stamp').textContent = SNAP&&SNAP.generated_at ? ('data as of '+SNAP.generated_at) : '';}
+
+async function load(){
+  try{
+    const r = await fetch('snapshot.json?_='+Date.now());
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    SNAP = await r.json();
+    renderAll();
+  }catch(e){
+    $('#pills').innerHTML = '<span class="pill">snapshot unavailable</span>';
+    console.error('Failed to load snapshot.json', e);
+  }
+}
+load();
+// re-pull the snapshot periodically so the page reflects the latest published cycle
+setInterval(load, 60000);
+</script>
+</body>
+</html>
