@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-08-05T23:03:13+00:00",
+  "generated_at": "2026-08-06T23:28:24+00:00",
   "status": {
     "mode": "PAPER",
     "regime": "BULL",
     "position_count": 8,
     "max_positions": 12,
     "deployed_pct": 49,
-    "last_run_date": "2026-08-05",
-    "sessions": 24
+    "last_run_date": "2026-08-06",
+    "sessions": 25
   },
   "performance": {
     "forward": {
@@ -37,7 +37,8 @@
         "2026-07-31",
         "2026-08-03",
         "2026-08-04",
-        "2026-08-05"
+        "2026-08-05",
+        "2026-08-06"
       ],
       "strategy": [
         100.0,
@@ -63,9 +64,11 @@
         96.25,
         94.7,
         96.85,
-        97.55
+        97.55,
+        96.18
       ],
       "realized": [
+        100.0,
         100.0,
         100.0,
         100.0,
@@ -115,11 +118,12 @@
         101.8,
         103.3,
         105.15,
-        104.98
+        104.98,
+        104.79
       ],
-      "strategy_return": -0.0245,
+      "strategy_return": -0.0382,
       "realized_return": 0.0,
-      "benchmark_return": 0.0498
+      "benchmark_return": 0.0479
     },
     "backtest": {
       "view": "backtest",
@@ -2147,7 +2151,7 @@
   },
   "trades": [],
   "regime": {
-    "date": "2026-08-05",
+    "date": "2026-08-06",
     "weights": {
       "spx_vs_200sma": 2.0,
       "spx_vs_50sma": 1.5,
@@ -2159,44 +2163,44 @@
       "spx_5d_mom": 0.5
     },
     "regime": "BULL",
-    "score": 7.0,
+    "score": 8.5,
     "max_score": 9.5,
     "factors": {
       "spx_vs_200sma": {
         "value": 1,
         "weight": 2.0,
         "contribution": 2.0,
-        "detail": "SPX 7,737 vs 200d SMA 7,034 (+10.0%)"
+        "detail": "SPX 7,724 vs 200d SMA 7,040 (+9.7%)"
       },
       "spx_vs_50sma": {
         "value": 1,
         "weight": 1.5,
         "contribution": 1.5,
-        "detail": "SPX 7,737 vs 50d SMA 7,481 (+3.4%)"
+        "detail": "SPX 7,724 vs 50d SMA 7,486 (+3.2%)"
       },
       "spx_20d_trend": {
         "value": 0,
         "weight": 1.0,
         "contribution": 0.0,
-        "detail": "20d slope flat (-0.01%/day)"
+        "detail": "20d slope flat (0.03%/day)"
       },
       "ndx_vs_200sma": {
         "value": 1,
         "weight": 1.0,
         "contribution": 1.0,
-        "detail": "NDX 29,733 vs 200d SMA 26,555 (+12.0%)"
+        "detail": "NDX 29,488 vs 200d SMA 26,579 (+10.9%)"
       },
       "spx_52wk_pos": {
         "value": 1,
         "weight": 1.0,
         "contribution": 1.0,
-        "detail": "SPX at 100th pct of 52w range"
+        "detail": "SPX at 99th pct of 52w range"
       },
       "breadth": {
-        "value": 0,
+        "value": 1,
         "weight": 1.5,
-        "contribution": 0.0,
-        "detail": "57% of basket > 50d SMA"
+        "contribution": 1.5,
+        "detail": "62% of basket > 50d SMA"
       },
       "realized_vol": {
         "value": 1,
@@ -2208,20 +2212,20 @@
         "value": 1,
         "weight": 0.5,
         "contribution": 0.5,
-        "detail": "SPX 5d +4.1%"
+        "detail": "SPX 5d +5.6%"
       }
     },
     "metrics": {
-      "spx_close": 7736.52002,
-      "spx_sma200": 7034.215002,
-      "spx_sma50": 7480.676221,
-      "spx_slope_norm": -0.000149,
-      "spx_52w_pos": 1.0,
-      "spx_realized_vol": 0.145007,
-      "spx_5d_mom": 0.041425,
-      "ndx_close": 29733.160156,
-      "ndx_sma200": 26554.655566,
-      "breadth_pct": 0.571429,
+      "spx_close": 7723.549805,
+      "spx_sma200": 7039.687402,
+      "spx_sma50": 7485.677813,
+      "spx_slope_norm": 0.000256,
+      "spx_52w_pos": 0.990976,
+      "spx_realized_vol": 0.144609,
+      "spx_5d_mom": 0.055685,
+      "ndx_close": 29487.789062,
+      "ndx_sma200": 26578.808311,
+      "breadth_pct": 0.619048,
       "slope_flat_threshold": 0.0005
     },
     "thresholds": {
@@ -2230,7 +2234,7 @@
     }
   },
   "gates": {
-    "date": "2026-08-05",
+    "date": "2026-08-06",
     "entries_open": true,
     "blocking_gate": null,
     "portfolio_gates": [
@@ -2248,7 +2252,7 @@
         "icon": "\ud83d\udcc8",
         "criterion": "Market regime must score BULL (\u2265 5.0 of 9.5). CAUTION / BEAR = hold existing positions only, no new entries.",
         "status": "open",
-        "detail": "BULL (score +7)"
+        "detail": "BULL (score +8.5)"
       },
       {
         "key": "window",
@@ -2303,24 +2307,24 @@
       {
         "key": "ml_gate",
         "label": "ML gate (LONG \u2265 0.50)",
-        "criterion": "ML ensemble reads LONG with \u2265 0.50 confidence. \u2014 this cycle: 3 passed \u00b7 24 not LONG (margin) \u00b7 1 under the 0.5 floor \u00b7 1 skipped (earnings).",
-        "survivors": 4,
-        "dropped": 25,
+        "criterion": "ML ensemble reads LONG with \u2265 0.50 confidence. \u2014 this cycle: 1 passed \u00b7 24 not LONG (margin) \u00b7 4 under the 0.5 floor.",
+        "survivors": 1,
+        "dropped": 28,
         "status": "pass"
       },
       {
         "key": "score",
         "label": "Score \u2265 4",
         "criterion": "Confidence score clears the 4 minimum and sits within sector caps.",
-        "survivors": 1,
-        "dropped": 3,
-        "status": "pass"
+        "survivors": 0,
+        "dropped": 1,
+        "status": "blocked"
       },
       {
         "key": "sizing",
         "label": "Sized (cash / risk OK)",
         "criterion": "Risk/cash sizing yields \u2265 1 share (1.5% risk unit, position \u2264 $8,000).",
-        "survivors": 1,
+        "survivors": 0,
         "dropped": 0,
         "status": "pass"
       },
@@ -2328,7 +2332,7 @@
         "key": "cap",
         "label": "Within 12-position cap",
         "criterion": "Fewer than 12 open positions \u2014 otherwise the highest scorer waits for a slot.",
-        "survivors": 1,
+        "survivors": 0,
         "dropped": 0,
         "status": "pass"
       }
@@ -2337,7 +2341,7 @@
     "note": null
   },
   "funnel": {
-    "date": "2026-08-05",
+    "date": "2026-08-06",
     "regime": "BULL",
     "stages": [
       {
@@ -2634,17 +2638,16 @@
       {
         "stage": "ml_gate",
         "label": "Passed ML gate (LONG)",
-        "count": 4,
+        "count": 1,
         "survivors": [
-          "AMZN",
-          "CAT",
-          "INTU",
-          "PSX"
+          "INTU"
         ],
         "eliminated": [
           "AAPL",
           "ADBE",
           "AMGN",
+          "AMZN",
+          "CAT",
           "CRM",
           "CSCO",
           "DHR",
@@ -2664,6 +2667,7 @@
           "NVDA",
           "PFE",
           "PG",
+          "PSX",
           "RTX",
           "TXN",
           "WMT"
@@ -2673,34 +2677,26 @@
       {
         "stage": "score",
         "label": "Cleared min score",
-        "count": 1,
-        "survivors": [
-          "CAT"
-        ],
+        "count": 0,
+        "survivors": [],
         "eliminated": [
-          "AMZN",
-          "INTU",
-          "PSX"
+          "INTU"
         ],
         "eliminated_reason": "score below min / sector cap"
       },
       {
         "stage": "sizing",
         "label": "Sized (cash/risk OK)",
-        "count": 1,
-        "survivors": [
-          "CAT"
-        ],
+        "count": 0,
+        "survivors": [],
         "eliminated": [],
         "eliminated_reason": "risk/cash sizing \u2192 0"
       },
       {
         "stage": "cap",
         "label": "Within position cap",
-        "count": 1,
-        "survivors": [
-          "CAT"
-        ],
+        "count": 0,
+        "survivors": [],
         "eliminated": [],
         "eliminated_reason": "position cap reached"
       },
@@ -2709,257 +2705,253 @@
         "label": "Entered",
         "count": 0,
         "survivors": [],
-        "eliminated": [
-          "CAT"
-        ],
+        "eliminated": [],
         "eliminated_reason": "not entered this cycle"
       }
     ],
     "scores": {
-      "AMZN": 4.5,
-      "INTU": 4.0,
-      "PSX": 4.5
+      "INTU": 4.0
     },
     "ml_gate": {
       "conf_min": 0.5,
       "margin_min": 0.15,
       "edge_confirmed": false,
       "arrived": 29,
-      "passed": 3,
-      "conf_fail": 1,
+      "passed": 1,
+      "conf_fail": 4,
       "margin_fail": 24,
-      "skipped_earnings": 1,
+      "skipped_earnings": 0,
       "rows": [
-        {
-          "ticker": "CAT",
-          "signal": "LONG",
-          "prob_long": 0.549,
-          "prob_short": 0.2485,
-          "margin": 0.3005,
-          "outcome": "skipped_earnings"
-        },
         {
           "ticker": "INTU",
           "signal": "LONG",
-          "prob_long": 0.5313,
-          "prob_short": 0.2625,
-          "margin": 0.2688,
+          "prob_long": 0.5067,
+          "prob_short": 0.3204,
+          "margin": 0.1863,
           "outcome": "pass"
         },
         {
-          "ticker": "AMZN",
+          "ticker": "EOG",
           "signal": "LONG",
-          "prob_long": 0.5145,
-          "prob_short": 0.2617,
-          "margin": 0.2528,
-          "outcome": "pass"
+          "prob_long": 0.4649,
+          "prob_short": 0.2846,
+          "margin": 0.1803,
+          "outcome": "conf_fail"
         },
         {
           "ticker": "PSX",
           "signal": "LONG",
-          "prob_long": 0.5213,
-          "prob_short": 0.2849,
-          "margin": 0.2364,
-          "outcome": "pass"
+          "prob_long": 0.482,
+          "prob_short": 0.3085,
+          "margin": 0.1735,
+          "outcome": "conf_fail"
         },
         {
-          "ticker": "LMT",
+          "ticker": "TXN",
           "signal": "LONG",
-          "prob_long": 0.4316,
-          "prob_short": 0.2665,
-          "margin": 0.1651,
+          "prob_long": 0.4907,
+          "prob_short": 0.3184,
+          "margin": 0.1723,
+          "outcome": "conf_fail"
+        },
+        {
+          "ticker": "AMGN",
+          "signal": "LONG",
+          "prob_long": 0.4711,
+          "prob_short": 0.3073,
+          "margin": 0.1638,
           "outcome": "conf_fail"
         },
         {
           "ticker": "ADBE",
           "signal": "HOLD",
-          "prob_long": 0.4311,
-          "prob_short": 0.283,
-          "margin": 0.1481,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "KLAC",
-          "signal": "HOLD",
-          "prob_long": 0.4996,
-          "prob_short": 0.3538,
-          "margin": 0.1458,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "TXN",
-          "signal": "HOLD",
-          "prob_long": 0.4748,
-          "prob_short": 0.3307,
-          "margin": 0.1441,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "MSFT",
-          "signal": "HOLD",
-          "prob_long": 0.446,
-          "prob_short": 0.3203,
-          "margin": 0.1257,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "RTX",
-          "signal": "HOLD",
-          "prob_long": 0.4327,
-          "prob_short": 0.3157,
-          "margin": 0.117,
+          "prob_long": 0.4379,
+          "prob_short": 0.3114,
+          "margin": 0.1265,
           "outcome": "margin_fail"
         },
         {
           "ticker": "LLY",
           "signal": "HOLD",
-          "prob_long": 0.4467,
-          "prob_short": 0.3398,
-          "margin": 0.1069,
+          "prob_long": 0.4294,
+          "prob_short": 0.3181,
+          "margin": 0.1113,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "AMZN",
+          "signal": "HOLD",
+          "prob_long": 0.3986,
+          "prob_short": 0.3007,
+          "margin": 0.0979,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "LMT",
+          "signal": "HOLD",
+          "prob_long": 0.398,
+          "prob_short": 0.309,
+          "margin": 0.089,
           "outcome": "margin_fail"
         },
         {
           "ticker": "AAPL",
           "signal": "HOLD",
-          "prob_long": 0.3877,
-          "prob_short": 0.2914,
-          "margin": 0.0963,
+          "prob_long": 0.4121,
+          "prob_short": 0.3271,
+          "margin": 0.085,
           "outcome": "margin_fail"
         },
         {
-          "ticker": "AMGN",
+          "ticker": "MSFT",
           "signal": "HOLD",
-          "prob_long": 0.4115,
-          "prob_short": 0.3194,
-          "margin": 0.0921,
+          "prob_long": 0.3861,
+          "prob_short": 0.3139,
+          "margin": 0.0722,
           "outcome": "margin_fail"
         },
         {
-          "ticker": "MA",
+          "ticker": "RTX",
           "signal": "HOLD",
-          "prob_long": 0.3991,
-          "prob_short": 0.308,
-          "margin": 0.0911,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "EOG",
-          "signal": "HOLD",
-          "prob_long": 0.4076,
-          "prob_short": 0.3414,
-          "margin": 0.0662,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "HON",
-          "signal": "HOLD",
-          "prob_long": 0.4174,
-          "prob_short": 0.3592,
-          "margin": 0.0582,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "JNJ",
-          "signal": "HOLD",
-          "prob_long": 0.4015,
-          "prob_short": 0.3475,
-          "margin": 0.054,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "DHR",
-          "signal": "HOLD",
-          "prob_long": 0.3935,
-          "prob_short": 0.3492,
-          "margin": 0.0443,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "CSCO",
-          "signal": "HOLD",
-          "prob_long": 0.3998,
-          "prob_short": 0.3679,
-          "margin": 0.0319,
+          "prob_long": 0.3862,
+          "prob_short": 0.3166,
+          "margin": 0.0696,
           "outcome": "margin_fail"
         },
         {
           "ticker": "CRM",
           "signal": "HOLD",
-          "prob_long": 0.3653,
-          "prob_short": 0.3403,
-          "margin": 0.025,
+          "prob_long": 0.3826,
+          "prob_short": 0.3133,
+          "margin": 0.0693,
           "outcome": "margin_fail"
         },
         {
           "ticker": "PFE",
           "signal": "HOLD",
-          "prob_long": 0.2867,
-          "prob_short": 0.2631,
-          "margin": 0.0236,
-          "outcome": "margin_fail"
-        },
-        {
-          "ticker": "META",
-          "signal": "HOLD",
-          "prob_long": 0.3997,
-          "prob_short": 0.3767,
-          "margin": 0.023,
+          "prob_long": 0.2894,
+          "prob_short": 0.2742,
+          "margin": 0.0152,
           "outcome": "margin_fail"
         },
         {
           "ticker": "HD",
           "signal": "HOLD",
-          "prob_long": 0.3541,
-          "prob_short": 0.3903,
-          "margin": -0.0362,
+          "prob_long": 0.3521,
+          "prob_short": 0.3381,
+          "margin": 0.014,
           "outcome": "margin_fail"
         },
         {
-          "ticker": "WMT",
+          "ticker": "META",
           "signal": "HOLD",
-          "prob_long": 0.3341,
-          "prob_short": 0.3775,
-          "margin": -0.0434,
+          "prob_long": 0.3819,
+          "prob_short": 0.3849,
+          "margin": -0.003,
           "outcome": "margin_fail"
         },
         {
-          "ticker": "NVDA",
+          "ticker": "HON",
           "signal": "HOLD",
-          "prob_long": 0.3546,
-          "prob_short": 0.4017,
-          "margin": -0.0471,
+          "prob_long": 0.3511,
+          "prob_short": 0.3552,
+          "margin": -0.0041,
           "outcome": "margin_fail"
         },
         {
-          "ticker": "NFLX",
+          "ticker": "JNJ",
           "signal": "HOLD",
-          "prob_long": 0.3546,
-          "prob_short": 0.438,
-          "margin": -0.0834,
+          "prob_long": 0.3492,
+          "prob_short": 0.354,
+          "margin": -0.0048,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "MA",
+          "signal": "HOLD",
+          "prob_long": 0.3248,
+          "prob_short": 0.3305,
+          "margin": -0.0057,
           "outcome": "margin_fail"
         },
         {
           "ticker": "GOOGL",
           "signal": "HOLD",
-          "prob_long": 0.3269,
-          "prob_short": 0.4151,
-          "margin": -0.0882,
+          "prob_long": 0.3991,
+          "prob_short": 0.4189,
+          "margin": -0.0198,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "DHR",
+          "signal": "HOLD",
+          "prob_long": 0.3472,
+          "prob_short": 0.3769,
+          "margin": -0.0297,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "NFLX",
+          "signal": "HOLD",
+          "prob_long": 0.3744,
+          "prob_short": 0.4322,
+          "margin": -0.0578,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "WMT",
+          "signal": "HOLD",
+          "prob_long": 0.3273,
+          "prob_short": 0.3869,
+          "margin": -0.0596,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "KLAC",
+          "signal": "HOLD",
+          "prob_long": 0.3926,
+          "prob_short": 0.4603,
+          "margin": -0.0677,
           "outcome": "margin_fail"
         },
         {
           "ticker": "PG",
           "signal": "HOLD",
-          "prob_long": 0.2876,
-          "prob_short": 0.4065,
-          "margin": -0.1189,
+          "prob_long": 0.3351,
+          "prob_short": 0.4029,
+          "margin": -0.0678,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "CAT",
+          "signal": "HOLD",
+          "prob_long": 0.3513,
+          "prob_short": 0.4305,
+          "margin": -0.0792,
           "outcome": "margin_fail"
         },
         {
           "ticker": "NOC",
           "signal": "HOLD",
-          "prob_long": 0.3051,
-          "prob_short": 0.4366,
-          "margin": -0.1315,
+          "prob_long": 0.2888,
+          "prob_short": 0.3816,
+          "margin": -0.0928,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "CSCO",
+          "signal": "HOLD",
+          "prob_long": 0.3405,
+          "prob_short": 0.4356,
+          "margin": -0.0951,
+          "outcome": "margin_fail"
+        },
+        {
+          "ticker": "NVDA",
+          "signal": "SHORT",
+          "prob_long": 0.3109,
+          "prob_short": 0.4697,
+          "margin": -0.1588,
           "outcome": "margin_fail"
         }
       ]
@@ -2968,62 +2960,10 @@
       "min_entry": 4.0,
       "cap": 10.0,
       "override_threshold": 8.0,
-      "arrived": 3,
+      "arrived": 1,
       "passed": 0,
-      "blocked": 3,
+      "blocked": 1,
       "rows": [
-        {
-          "ticker": "AMZN",
-          "final_score": 4.5,
-          "raw_score": 4.5,
-          "tradeable": false,
-          "reason": "allocation_penalty_below_override",
-          "alloc_state": "overweight_2plus",
-          "alloc_adj": -2.0,
-          "news_label": "mildly positive",
-          "components": {
-            "ml_signal": 1.5,
-            "fundamental": 1.0,
-            "rsi": 0.0,
-            "macd": 0.5,
-            "price_vs_20sma": 0.5,
-            "volume": 0.5,
-            "earnings": 0.5,
-            "scanner": 0.5,
-            "insider": 0.0,
-            "no_disagreement": 0.5,
-            "mtf_alignment": 0.0,
-            "regime_bonus": 1.0,
-            "news": 0.0,
-            "allocation": -2.0
-          }
-        },
-        {
-          "ticker": "PSX",
-          "final_score": 4.5,
-          "raw_score": 4.5,
-          "tradeable": false,
-          "reason": "allocation_penalty_below_override",
-          "alloc_state": "overweight_1",
-          "alloc_adj": -1.0,
-          "news_label": "mildly positive",
-          "components": {
-            "ml_signal": 1.5,
-            "fundamental": 1.0,
-            "rsi": 0.5,
-            "macd": 0.0,
-            "price_vs_20sma": 0.5,
-            "volume": 0.5,
-            "earnings": 0.0,
-            "scanner": 0.0,
-            "insider": 0.0,
-            "no_disagreement": 0.5,
-            "mtf_alignment": 0.0,
-            "regime_bonus": 1.0,
-            "news": 0.0,
-            "allocation": -1.0
-          }
-        },
         {
           "ticker": "INTU",
           "final_score": 4.0,
@@ -3054,44 +2994,44 @@
     },
     "regime_detail": {
       "regime": "BULL",
-      "score": 7.0,
+      "score": 8.5,
       "max_score": 9.5,
       "factors": {
         "spx_vs_200sma": {
           "value": 1,
           "weight": 2.0,
           "contribution": 2.0,
-          "detail": "SPX 7,737 vs 200d SMA 7,034 (+10.0%)"
+          "detail": "SPX 7,724 vs 200d SMA 7,040 (+9.7%)"
         },
         "spx_vs_50sma": {
           "value": 1,
           "weight": 1.5,
           "contribution": 1.5,
-          "detail": "SPX 7,737 vs 50d SMA 7,481 (+3.4%)"
+          "detail": "SPX 7,724 vs 50d SMA 7,486 (+3.2%)"
         },
         "spx_20d_trend": {
           "value": 0,
           "weight": 1.0,
           "contribution": 0.0,
-          "detail": "20d slope flat (-0.01%/day)"
+          "detail": "20d slope flat (0.03%/day)"
         },
         "ndx_vs_200sma": {
           "value": 1,
           "weight": 1.0,
           "contribution": 1.0,
-          "detail": "NDX 29,733 vs 200d SMA 26,555 (+12.0%)"
+          "detail": "NDX 29,488 vs 200d SMA 26,579 (+10.9%)"
         },
         "spx_52wk_pos": {
           "value": 1,
           "weight": 1.0,
           "contribution": 1.0,
-          "detail": "SPX at 100th pct of 52w range"
+          "detail": "SPX at 99th pct of 52w range"
         },
         "breadth": {
-          "value": 0,
+          "value": 1,
           "weight": 1.5,
-          "contribution": 0.0,
-          "detail": "57% of basket > 50d SMA"
+          "contribution": 1.5,
+          "detail": "62% of basket > 50d SMA"
         },
         "realized_vol": {
           "value": 1,
@@ -3103,20 +3043,20 @@
           "value": 1,
           "weight": 0.5,
           "contribution": 0.5,
-          "detail": "SPX 5d +4.1%"
+          "detail": "SPX 5d +5.6%"
         }
       },
       "metrics": {
-        "spx_close": 7736.52002,
-        "spx_sma200": 7034.215002,
-        "spx_sma50": 7480.676221,
-        "spx_slope_norm": -0.000149,
-        "spx_52w_pos": 1.0,
-        "spx_realized_vol": 0.145007,
-        "spx_5d_mom": 0.041425,
-        "ndx_close": 29733.160156,
-        "ndx_sma200": 26554.655566,
-        "breadth_pct": 0.571429,
+        "spx_close": 7723.549805,
+        "spx_sma200": 7039.687402,
+        "spx_sma50": 7485.677813,
+        "spx_slope_norm": 0.000256,
+        "spx_52w_pos": 0.990976,
+        "spx_realized_vol": 0.144609,
+        "spx_5d_mom": 0.055685,
+        "ndx_close": 29487.789062,
+        "ndx_sma200": 26578.808311,
+        "breadth_pct": 0.619048,
         "slope_flat_threshold": 0.0005
       },
       "thresholds": {
@@ -3128,7 +3068,7 @@
     "breaker": "OK",
     "window_open": true,
     "underwater": {
-      "count": 5,
+      "count": 6,
       "max": null,
       "throttled": false
     },
@@ -3161,14 +3101,14 @@
         "ticker": "HON",
         "bucket": "DEFENSE",
         "sector": "Industrials",
-        "trailing_pe": 9.5430765,
-        "forward_pe": 24.778349,
+        "trailing_pe": 9.259231,
+        "forward_pe": 24.041351,
         "peg": 3.9266,
         "eps_growth": 2.639,
         "roe": 0.46577,
         "ttm_fcf": 4148000000.0,
         "debt_to_equity": 1.6998,
-        "price": 248.12,
+        "price": 240.74,
         "included": false,
         "forced": false,
         "reason": "PEG 3.93 > 3.00"
@@ -3209,14 +3149,14 @@
         "ticker": "COP",
         "bucket": "ENERGY",
         "sector": "Energy",
-        "trailing_pe": 19.498304,
-        "forward_pe": 12.780376,
+        "trailing_pe": 19.789831,
+        "forward_pe": 12.844546,
         "peg": 1.0,
         "eps_growth": -0.202,
         "roe": 0.112840004,
         "ttm_fcf": 7817000000.0,
         "debt_to_equity": 0.9015,
-        "price": 115.04,
+        "price": 116.76,
         "included": false,
         "forced": false,
         "reason": "EPS growth -20% < -10%"
@@ -3238,22 +3178,6 @@
         "reason": "EPS growth -57% < -10%"
       },
       {
-        "ticker": "META",
-        "bucket": "TECH",
-        "sector": "Communication Services",
-        "trailing_pe": 22.167547,
-        "forward_pe": 16.75677,
-        "peg": 0.8311,
-        "eps_growth": -0.134,
-        "roe": 0.29848,
-        "ttm_fcf": 48253000000.0,
-        "debt_to_equity": 0.622,
-        "price": 588.77,
-        "included": false,
-        "forced": false,
-        "reason": "EPS growth -13% < -10%"
-      },
-      {
         "ticker": "PG",
         "bucket": "OTHER",
         "sector": "Consumer Defensive",
@@ -3268,6 +3192,22 @@
         "included": false,
         "forced": false,
         "reason": "PEG 5.57 > 3.00"
+      },
+      {
+        "ticker": "META",
+        "bucket": "TECH",
+        "sector": "Communication Services",
+        "trailing_pe": 22.218458,
+        "forward_pe": 16.788929,
+        "peg": 0.8311,
+        "eps_growth": -0.134,
+        "roe": 0.29848,
+        "ttm_fcf": 48253000000.0,
+        "debt_to_equity": 0.622,
+        "price": 589.9,
+        "included": false,
+        "forced": false,
+        "reason": "EPS growth -13% < -10%"
       },
       {
         "ticker": "SLB",
@@ -3305,14 +3245,14 @@
         "ticker": "JNJ",
         "bucket": "PHARMA",
         "sector": "Healthcare",
-        "trailing_pe": 29.88283,
-        "forward_pe": 20.756647,
+        "trailing_pe": 29.777521,
+        "forward_pe": 20.879951,
         "peg": 4.2082,
         "eps_growth": -0.009,
         "roe": 0.25742,
         "ttm_fcf": 22244000000.0,
         "debt_to_equity": 1.3662,
-        "price": 257.59,
+        "price": 256.98,
         "included": false,
         "forced": false,
         "reason": "PEG 4.21 > 3.00"
@@ -3353,14 +3293,14 @@
         "ticker": "GE",
         "bucket": "DEFENSE",
         "sector": "Industrials",
-        "trailing_pe": 44.90224,
-        "forward_pe": 42.007202,
+        "trailing_pe": 44.27305,
+        "forward_pe": 41.272224,
         "peg": 5.5419,
         "eps_growth": 0.194,
         "roe": 0.48231998,
         "ttm_fcf": 8490000000.0,
         "debt_to_equity": 6.2248,
-        "price": 381.22,
+        "price": 374.55,
         "included": false,
         "forced": false,
         "reason": "PEG 5.54 > 3.00"
@@ -3369,46 +3309,46 @@
         "ticker": "COST",
         "bucket": "OTHER",
         "sector": "Consumer Defensive",
-        "trailing_pe": 47.33618,
-        "forward_pe": 41.593296,
+        "trailing_pe": 47.743965,
+        "forward_pe": 41.909443,
         "peg": 4.6182,
         "eps_growth": 0.455,
         "roe": 0.29152,
         "ttm_fcf": 8806000000.0,
         "debt_to_equity": 1.5793,
-        "price": 941.99,
+        "price": 949.15,
         "included": false,
         "forced": false,
         "reason": "PEG 4.62 > 3.00"
       },
       {
-        "ticker": "AVGO",
-        "bucket": "TECH",
-        "sector": "Technology",
-        "trailing_pe": 69.48173,
-        "forward_pe": 21.459103,
-        "peg": 0.4376,
-        "eps_growth": 0.854,
-        "roe": 0.37280998,
-        "ttm_fcf": 32762000000.0,
-        "debt_to_equity": 3.6673,
-        "price": 418.28,
-        "included": false,
-        "forced": false,
-        "reason": "PE 69 > 60"
-      },
-      {
         "ticker": "ABBV",
         "bucket": "PHARMA",
         "sector": "Healthcare",
-        "trailing_pe": 69.54802,
-        "forward_pe": 15.0648575,
+        "trailing_pe": 68.69578,
+        "forward_pe": 14.92986,
         "peg": 0.4131,
         "eps_growth": 2.904,
         "roe": null,
         "ttm_fcf": 19980000000.0,
         "debt_to_equity": null,
-        "price": 246.2,
+        "price": 243.87,
+        "included": false,
+        "forced": false,
+        "reason": "PE 69 > 60"
+      },
+      {
+        "ticker": "AVGO",
+        "bucket": "TECH",
+        "sector": "Technology",
+        "trailing_pe": 69.8613,
+        "forward_pe": 21.576332,
+        "peg": 0.4376,
+        "eps_growth": 0.854,
+        "roe": 0.37280998,
+        "ttm_fcf": 32762000000.0,
+        "debt_to_equity": 3.6673,
+        "price": 420.565,
         "included": false,
         "forced": false,
         "reason": "PE 70 > 60"
@@ -3433,17 +3373,17 @@
         "ticker": "BA",
         "bucket": "DEFENSE",
         "sector": "Industrials",
-        "trailing_pe": 86.71119,
-        "forward_pe": 58.100834,
+        "trailing_pe": 83.22222,
+        "forward_pe": 56.165672,
         "peg": 89.2922,
         "eps_growth": null,
         "roe": 1.73537,
         "ttm_fcf": -210000000.0,
         "debt_to_equity": 26.1893,
-        "price": 240.19,
+        "price": 232.19,
         "included": false,
         "forced": false,
-        "reason": "PE 87 > 60"
+        "reason": "PE 83 > 60"
       },
       {
         "ticker": "SNPS",
@@ -3481,17 +3421,17 @@
         "ticker": "AMD",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 160.1495,
-        "forward_pe": 32.169285,
+        "trailing_pe": 125.456406,
+        "forward_pe": 35.15564,
         "peg": 1.116,
-        "eps_growth": 0.912,
-        "roe": 0.08063,
+        "eps_growth": 1.595,
+        "roe": 0.10196,
         "ttm_fcf": 8574000000.0,
         "debt_to_equity": 0.0365,
-        "price": 482.05,
+        "price": 489.28,
         "included": false,
         "forced": false,
-        "reason": "PE 160 > 60"
+        "reason": "PE 125 > 60"
       },
       {
         "ticker": "TSLA",
@@ -3530,13 +3470,13 @@
         "bucket": "TECH",
         "sector": "Technology",
         "trailing_pe": null,
-        "forward_pe": 49.19892,
+        "forward_pe": 48.460632,
         "peg": null,
         "eps_growth": null,
         "roe": -0.10715,
         "ttm_fcf": 2831000000.0,
         "debt_to_equity": 0.5546,
-        "price": 101.06,
+        "price": 99.81,
         "included": false,
         "forced": false,
         "reason": "unprofitable (EPS \u2264 0)"
@@ -3545,14 +3485,14 @@
         "ticker": "LRCX",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 53.46435,
-        "forward_pe": 26.67368,
+        "trailing_pe": 53.17739,
+        "forward_pe": 26.530512,
         "peg": 1.4944,
         "eps_growth": 0.347,
         "roe": 0.65066004,
         "ttm_fcf": 6004822000.0,
         "debt_to_equity": 0.9643,
-        "price": 307.42,
+        "price": 305.77,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3561,14 +3501,14 @@
         "ticker": "KLAC",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 52.82192,
-        "forward_pe": 29.43835,
+        "trailing_pe": 52.792347,
+        "forward_pe": 29.50248,
         "peg": 1.8688,
         "eps_growth": 0.147,
         "roe": 0.87496,
         "ttm_fcf": 4014575000.0,
         "debt_to_equity": 1.894,
-        "price": 192.8,
+        "price": 193.22,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3577,14 +3517,14 @@
         "ticker": "AMAT",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 50.305084,
-        "forward_pe": 31.331812,
+        "trailing_pe": 49.621822,
+        "forward_pe": 30.935354,
         "peg": 1.2826,
         "eps_growth": 0.335,
         "roe": 0.39692003,
         "ttm_fcf": 5343000000.0,
         "debt_to_equity": 0.685,
-        "price": 534.24,
+        "price": 527.48,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3606,33 +3546,33 @@
         "reason": "passes screen"
       },
       {
-        "ticker": "LLY",
-        "bucket": "PHARMA",
-        "sector": "Healthcare",
-        "trailing_pe": 41.558083,
-        "forward_pe": 25.852413,
-        "peg": 1.5593,
-        "eps_growth": 1.699,
-        "roe": 1.07459,
-        "ttm_fcf": null,
-        "debt_to_equity": 1.2619,
-        "price": 1169.86,
-        "included": true,
-        "forced": false,
-        "reason": "passes screen"
-      },
-      {
         "ticker": "CSCO",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 40.5,
-        "forward_pe": 25.361055,
+        "trailing_pe": 40.29333,
+        "forward_pe": 25.206387,
         "peg": 1.6097,
         "eps_growth": 0.371,
         "roe": 0.25229,
         "ttm_fcf": 11788000000.0,
         "debt_to_equity": 1.5695,
-        "price": 121.5,
+        "price": 120.88,
+        "included": true,
+        "forced": false,
+        "reason": "passes screen"
+      },
+      {
+        "ticker": "LLY",
+        "bucket": "PHARMA",
+        "sector": "Healthcare",
+        "trailing_pe": 39.95776,
+        "forward_pe": 25.812708,
+        "peg": 1.5593,
+        "eps_growth": 0.262,
+        "roe": null,
+        "ttm_fcf": null,
+        "debt_to_equity": 1.2619,
+        "price": 1191.94,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3657,14 +3597,14 @@
         "ticker": "CAT",
         "bucket": "OTHER",
         "sector": "Industrials",
-        "trailing_pe": 37.498066,
-        "forward_pe": 28.605564,
+        "trailing_pe": 36.842648,
+        "forward_pe": 28.058596,
         "peg": 2.0558,
-        "eps_growth": 0.302,
-        "roe": 0.51331,
+        "eps_growth": 0.682,
+        "roe": 0.56972003,
         "ttm_fcf": 9481000000.0,
         "debt_to_equity": null,
-        "price": 871.08,
+        "price": 856.96,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3673,14 +3613,14 @@
         "ticker": "AAPL",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 35.706085,
-        "forward_pe": 32.691864,
+        "trailing_pe": 35.86797,
+        "forward_pe": 32.84008,
         "peg": 2.4573,
         "eps_growth": 0.287,
         "roe": 1.4875101,
         "ttm_fcf": 136683000000.0,
         "debt_to_equity": 2.5646,
-        "price": 311.0,
+        "price": 312.41,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3689,14 +3629,14 @@
         "ticker": "DHR",
         "bucket": "PHARMA",
         "sector": "Healthcare",
-        "trailing_pe": 35.59002,
-        "forward_pe": 21.471634,
+        "trailing_pe": 35.647057,
+        "forward_pe": 21.506046,
         "peg": 1.2701,
         "eps_growth": 0.597,
         "roe": 0.07605,
         "ttm_fcf": 5466000000.0,
         "debt_to_equity": 0.1606,
-        "price": 199.66,
+        "price": 199.98,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3721,14 +3661,14 @@
         "ticker": "MA",
         "bucket": "OTHER",
         "sector": "Financial Services",
-        "trailing_pe": 31.414097,
-        "forward_pe": 24.809454,
-        "peg": 1.7598,
+        "trailing_pe": 31.645603,
+        "forward_pe": 25.047338,
+        "peg": 1.7527,
         "eps_growth": 0.221,
         "roe": 2.41202,
         "ttm_fcf": 16702000000.0,
         "debt_to_equity": 9.2827,
-        "price": 570.48,
+        "price": 575.95,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3782,22 +3722,6 @@
         "reason": "passes screen"
       },
       {
-        "ticker": "AMGN",
-        "bucket": "PHARMA",
-        "sector": "Healthcare",
-        "trailing_pe": 28.400417,
-        "forward_pe": 17.399885,
-        "peg": 2.1139,
-        "eps_growth": 0.044,
-        "roe": 1.01318,
-        "ttm_fcf": 8597000000.0,
-        "debt_to_equity": 5.6459,
-        "price": 407.83,
-        "included": true,
-        "forced": false,
-        "reason": "passes screen"
-      },
-      {
         "ticker": "MSFT",
         "bucket": "TECH",
         "sector": "Technology",
@@ -3830,17 +3754,33 @@
         "reason": "passes screen"
       },
       {
+        "ticker": "AMGN",
+        "bucket": "PHARMA",
+        "sector": "Healthcare",
+        "trailing_pe": 25.130354,
+        "forward_pe": 16.863003,
+        "peg": 2.1139,
+        "eps_growth": 0.649,
+        "roe": 0.91473,
+        "ttm_fcf": 8597000000.0,
+        "debt_to_equity": 5.6459,
+        "price": 404.85,
+        "included": true,
+        "forced": false,
+        "reason": "passes screen"
+      },
+      {
         "ticker": "HD",
         "bucket": "OTHER",
         "sector": "Consumer Cyclical",
-        "trailing_pe": 25.098793,
-        "forward_pe": 21.913176,
+        "trailing_pe": 24.806244,
+        "forward_pe": 21.688545,
         "peg": 1.8716,
         "eps_growth": -0.043,
         "roe": 1.2838,
         "ttm_fcf": 14315000000.0,
         "debt_to_equity": 6.7774,
-        "price": 353.14,
+        "price": 349.52,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3849,14 +3789,14 @@
         "ticker": "GD",
         "bucket": "DEFENSE",
         "sector": "Industrials",
-        "trailing_pe": 23.433802,
-        "forward_pe": 20.758993,
+        "trailing_pe": 23.592684,
+        "forward_pe": 20.912493,
         "peg": 2.6792,
         "eps_growth": 0.134,
         "roe": 0.17803,
         "ttm_fcf": 6201000000.0,
         "debt_to_equity": 0.24,
-        "price": 384.08,
+        "price": 386.92,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3878,33 +3818,33 @@
         "reason": "passes screen"
       },
       {
-        "ticker": "CRM",
-        "bucket": "TECH",
-        "sector": "Technology",
-        "trailing_pe": 22.361528,
-        "forward_pe": 12.440458,
-        "peg": 0.7639,
-        "eps_growth": 0.522,
-        "roe": 0.16908,
-        "ttm_fcf": 14661000000.0,
-        "debt_to_equity": 2.1161,
-        "price": 192.98,
-        "included": true,
-        "forced": false,
-        "reason": "passes screen"
-      },
-      {
         "ticker": "AMZN",
         "bucket": "TECH",
         "sector": "Consumer Cyclical",
-        "trailing_pe": 21.917202,
-        "forward_pe": 26.426155,
+        "trailing_pe": 21.90346,
+        "forward_pe": 26.358925,
         "peg": 1.8867,
         "eps_growth": 2.423,
         "roe": 0.30558002,
         "ttm_fcf": 153984000000.0,
         "debt_to_equity": 0.2337,
-        "price": 272.65,
+        "price": 272.26,
+        "included": true,
+        "forced": false,
+        "reason": "passes screen"
+      },
+      {
+        "ticker": "CRM",
+        "bucket": "TECH",
+        "sector": "Technology",
+        "trailing_pe": 21.641947,
+        "forward_pe": 12.040131,
+        "peg": 0.7639,
+        "eps_growth": 0.522,
+        "roe": 0.16908,
+        "ttm_fcf": 14661000000.0,
+        "debt_to_equity": 2.1161,
+        "price": 186.77,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3913,14 +3853,14 @@
         "ticker": "LMT",
         "bucket": "DEFENSE",
         "sector": "Industrials",
-        "trailing_pe": 21.2744,
-        "forward_pe": 17.656681,
+        "trailing_pe": 21.467772,
+        "forward_pe": 17.817167,
         "peg": 1.2196,
         "eps_growth": 4.438,
         "roe": 0.89165,
         "ttm_fcf": 9483000000.0,
         "debt_to_equity": 6.1225,
-        "price": 577.6,
+        "price": 582.85,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3945,30 +3885,14 @@
         "ticker": "INTU",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 20.032986,
-        "forward_pe": 11.985958,
+        "trailing_pe": 19.628658,
+        "forward_pe": 11.765566,
         "peg": 0.8205,
         "eps_growth": 0.107,
         "roe": 0.22496,
         "ttm_fcf": 7755000000.0,
         "debt_to_equity": 0.9065,
-        "price": 327.94,
-        "included": true,
-        "forced": false,
-        "reason": "passes screen"
-      },
-      {
-        "ticker": "GOOGL",
-        "bucket": "TECH",
-        "sector": "Communication Services",
-        "trailing_pe": 18.166916,
-        "forward_pe": 24.597488,
-        "peg": 1.0234,
-        "eps_growth": 2.94,
-        "roe": 0.48676,
-        "ttm_fcf": 53273000000.0,
-        "debt_to_equity": 0.4395,
-        "price": 362.43,
+        "price": 321.91,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3977,14 +3901,30 @@
         "ticker": "CVX",
         "bucket": "ENERGY",
         "sector": "Energy",
-        "trailing_pe": 17.92404,
-        "forward_pe": 14.375768,
+        "trailing_pe": 18.23025,
+        "forward_pe": 14.593243,
         "peg": 0.7491,
         "eps_growth": 3.229,
         "roe": null,
         "ttm_fcf": 13781000000.0,
         "debt_to_equity": 0.763,
-        "price": 186.41,
+        "price": 189.23,
+        "included": true,
+        "forced": false,
+        "reason": "passes screen"
+      },
+      {
+        "ticker": "GOOGL",
+        "bucket": "TECH",
+        "sector": "Communication Services",
+        "trailing_pe": 17.950325,
+        "forward_pe": 24.279867,
+        "peg": 1.0234,
+        "eps_growth": 2.94,
+        "roe": 0.48676,
+        "ttm_fcf": 53273000000.0,
+        "debt_to_equity": 0.4395,
+        "price": 357.75,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -3993,14 +3933,14 @@
         "ticker": "JPM",
         "bucket": "OTHER",
         "sector": "Financial Services",
-        "trailing_pe": 15.38501,
-        "forward_pe": 14.365582,
+        "trailing_pe": 15.2591,
+        "forward_pe": 14.248015,
         "peg": 1.7486,
         "eps_growth": 0.469,
         "roe": 0.17789,
         "ttm_fcf": null,
         "debt_to_equity": 12.4614,
-        "price": 359.24,
+        "price": 356.3,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -4009,14 +3949,14 @@
         "ticker": "ADBE",
         "bucket": "TECH",
         "sector": "Technology",
-        "trailing_pe": 14.835241,
-        "forward_pe": 9.434323,
+        "trailing_pe": 14.887872,
+        "forward_pe": 9.4677925,
         "peg": 0.6846,
         "eps_growth": 0.079,
         "roe": 0.62953997,
         "ttm_fcf": 10280000000.0,
         "debt_to_equity": 1.5988,
-        "price": 259.32,
+        "price": 260.24,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -4025,14 +3965,14 @@
         "ticker": "BMY",
         "bucket": "PHARMA",
         "sector": "Healthcare",
-        "trailing_pe": 14.015419,
-        "forward_pe": 9.7144,
+        "trailing_pe": 14.129956,
+        "forward_pe": 9.815352,
         "peg": 2.5268,
         "eps_growth": 1.531,
         "roe": 0.46598998,
         "ttm_fcf": 11440000000.0,
         "debt_to_equity": 2.9264,
-        "price": 63.63,
+        "price": 64.15,
         "included": true,
         "forced": false,
         "reason": "passes screen"
@@ -4041,14 +3981,14 @@
         "ticker": "EOG",
         "bucket": "ENERGY",
         "sector": "Energy",
-        "trailing_pe": 10.445913,
-        "forward_pe": 9.136184,
+        "trailing_pe": 10.599221,
+        "forward_pe": 9.289724,
         "peg": 1.146,
-        "eps_growth": 0.396,
-        "roe": 0.18195,
+        "eps_growth": 1.094,
+        "roe": 0.22507,
         "ttm_fcf": null,
         "debt_to_equity": 0.2557,
-        "price": 134.23,
+        "price": 136.2,
         "included": true,
         "forced": false,
         "reason": "passes screen"
