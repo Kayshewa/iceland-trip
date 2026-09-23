@@ -116,6 +116,7 @@ a{color:inherit; text-decoration:none}
 .t-swing .icon{background:var(--amber-soft);color:var(--amber)}
 .t-sound .icon{background:var(--rose-soft);color:var(--rose)}
 .t-land .icon{background:var(--green-soft);color:var(--green)}
+.t-teach .icon{background:var(--accent-soft);color:var(--accent)}
 
 /* ---- submenu (Vacation Itineraries) ---- */
 .submenu{display:none;flex-direction:column;gap:2px;margin:2px -6px -4px;padding-top:4px;border-top:1px dashed var(--line)}
@@ -246,6 +247,13 @@ const TILES = [
     title:"LandScout", kicker:"Real Estate",
     desc:"Greater Houston land finder — aggregates free listing and government-auction sources, with utility signals (water/sewer/electric/gas) and comps-based deal scores.",
     href:"https://land.tripiandkayshewa.com", status:"live", locked:false
+  },
+  {
+    id:"teachnow", cls:"t-teach", icon:"🎓",
+    title:"TeachNow", kicker:"Higher Ed",
+    desc:"A pre-vetted bench of adjunct lecturers across the US and Europe — department chairs post a last-minute class and get a verified shortlist in minutes.",
+    // flip to status:"live" + href:"https://teachnow.tripiandkayshewa.com" once the Vercel domain is verified
+    href:"", status:"soon", locked:true
   }
 ];
 
