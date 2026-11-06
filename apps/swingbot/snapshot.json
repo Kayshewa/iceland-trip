@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-05T00:06:58+00:00",
+  "generated_at": "2026-11-06T00:06:30+00:00",
   "status": {
     "mode": "PAPER",
     "regime": "CAUTION",
-    "position_count": 7,
+    "position_count": 6,
     "max_positions": 12,
-    "deployed_pct": 32,
-    "last_run_date": "2026-11-04",
-    "sessions": 80
+    "deployed_pct": 27,
+    "last_run_date": "2026-11-05",
+    "sessions": 81
   },
   "performance": {
     "forward": {
@@ -93,7 +93,8 @@
         "2026-10-30",
         "2026-11-02",
         "2026-11-03",
-        "2026-11-04"
+        "2026-11-04",
+        "2026-11-05"
       ],
       "strategy": [
         100.0,
@@ -175,7 +176,8 @@
         96.82,
         96.65,
         96.32,
-        95.9
+        95.9,
+        94.77
       ],
       "realized": [
         100.0,
@@ -257,93 +259,95 @@
         103.38,
         103.38,
         103.38,
-        103.38
+        103.38,
+        103.52
       ],
       "benchmark": [
         100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0,
-        100.0
+        99.95,
+        101.13,
+        101.93,
+        101.71,
+        101.71,
+        102.45,
+        101.99,
+        101.7,
+        102.53,
+        102.96,
+        102.15,
+        102.53,
+        102.92,
+        101.36,
+        101.17,
+        102.06,
+        101.92,
+        100.69,
+        100.74,
+        101.8,
+        103.3,
+        105.15,
+        104.98,
+        104.79,
+        105.44,
+        105.38,
+        105.04,
+        105.27,
+        104.54,
+        104.76,
+        104.01,
+        104.35,
+        105.08,
+        104.82,
+        104.47,
+        103.72,
+        104.2,
+        105.3,
+        104.91,
+        104.3,
+        103.18,
+        104.07,
+        103.57,
+        103.1,
+        102.64,
+        103.81,
+        103.98,
+        105.53,
+        105.53,
+        104.74,
+        105.25,
+        104.43,
+        104.26,
+        104.0,
+        104.2,
+        104.96,
+        105.66,
+        106.27,
+        106.04,
+        105.54,
+        106.17,
+        106.11,
+        106.09,
+        104.91,
+        105.25,
+        104.1,
+        104.53,
+        104.83,
+        105.43,
+        104.16,
+        103.62,
+        104.34,
+        104.96,
+        105.25,
+        104.93,
+        103.03,
+        102.5,
+        102.87,
+        104.5,
+        99.95
       ],
-      "strategy_return": -0.041,
-      "realized_return": 0.0338,
-      "benchmark_return": 0.0
+      "strategy_return": -0.0523,
+      "realized_return": 0.0352,
+      "benchmark_return": -0.0005
     },
     "backtest": {
       "view": "backtest",
@@ -2371,6 +2375,14 @@
   },
   "trades": [
     {
+      "ticker": "PSX",
+      "exit_date": "2026-11-05",
+      "pnl_pct": 0.037542,
+      "hold_days": 65.0,
+      "exit_reason": "trailing_stop",
+      "sector": "ENERGY"
+    },
+    {
       "ticker": "MPC",
       "exit_date": "2026-10-09",
       "pnl_pct": 0.208359,
@@ -2396,7 +2408,7 @@
     }
   ],
   "regime": {
-    "date": "2026-11-04",
+    "date": "2026-11-05",
     "weights": {
       "spx_vs_200sma": 2.0,
       "spx_vs_50sma": 1.5,
@@ -2408,69 +2420,69 @@
       "spx_5d_mom": 0.5
     },
     "regime": "CAUTION",
-    "score": 1.0,
+    "score": 4.5,
     "max_score": 9.5,
     "factors": {
       "spx_vs_200sma": {
         "value": 1,
         "weight": 2.0,
         "contribution": 2.0,
-        "detail": "SPX 7,569 vs 200d SMA 7,316 (+3.5%)"
+        "detail": "SPX 7,689 vs 200d SMA 7,320 (+5.0%)"
       },
       "spx_vs_50sma": {
-        "value": -1,
+        "value": 0,
         "weight": 1.5,
-        "contribution": -1.5,
-        "detail": "SPX 7,569 vs 50d SMA 7,693 (-1.6%)"
+        "contribution": 0.0,
+        "detail": "SPX 7,689 vs 50d SMA 7,693 (-0.1%)"
       },
       "spx_20d_trend": {
         "value": -1,
         "weight": 1.0,
         "contribution": -1.0,
-        "detail": "20d slope -0.14%/day"
+        "detail": "20d slope -0.12%/day"
       },
       "ndx_vs_200sma": {
         "value": 0,
         "weight": 1.0,
         "contribution": 0.0,
-        "detail": "NDX 28,180 vs 200d SMA 27,953 (+0.8%)"
+        "detail": "NDX 28,437 vs 200d SMA 27,970 (+1.7%)"
       },
       "spx_52wk_pos": {
         "value": 1,
         "weight": 1.0,
         "contribution": 1.0,
-        "detail": "SPX at 83th pct of 52w range"
+        "detail": "SPX at 91th pct of 52w range"
       },
       "breadth": {
-        "value": 0,
+        "value": 1,
         "weight": 1.5,
-        "contribution": 0.0,
-        "detail": "57% of basket > 50d SMA"
+        "contribution": 1.5,
+        "detail": "67% of basket > 50d SMA"
       },
       "realized_vol": {
         "value": 1,
         "weight": 1.0,
         "contribution": 1.0,
-        "detail": "realized vol 11.4% annualised"
+        "detail": "realized vol 12.9% annualised"
       },
       "spx_5d_mom": {
-        "value": -1,
+        "value": 0,
         "weight": 0.5,
-        "contribution": -0.5,
-        "detail": "SPX 5d -2.0%"
+        "contribution": 0.0,
+        "detail": "SPX 5d -0.7%"
       }
     },
     "metrics": {
-      "spx_close": 7568.919922,
-      "spx_sma200": 7315.886362,
-      "spx_sma50": 7692.742627,
-      "spx_slope_norm": -0.001382,
-      "spx_52w_pos": 0.830526,
-      "spx_realized_vol": 0.113664,
-      "spx_5d_mom": -0.0199,
-      "ndx_close": 28180.259766,
-      "ndx_sma200": 27952.769307,
-      "breadth_pct": 0.571429,
+      "spx_close": 7688.620117,
+      "spx_sma200": 7320.345164,
+      "spx_sma50": 7692.969434,
+      "spx_slope_norm": -0.001218,
+      "spx_52w_pos": 0.911667,
+      "spx_realized_vol": 0.12915,
+      "spx_5d_mom": -0.007149,
+      "ndx_close": 28437.169922,
+      "ndx_sma200": 27970.017305,
+      "breadth_pct": 0.666667,
       "slope_flat_threshold": 0.0005
     },
     "thresholds": {
@@ -2479,7 +2491,7 @@
     }
   },
   "gates": {
-    "date": "2026-11-04",
+    "date": "2026-11-05",
     "entries_open": false,
     "blocking_gate": "Bull regime",
     "portfolio_gates": [
@@ -2497,7 +2509,7 @@
         "icon": "\ud83d\udcc8",
         "criterion": "Market regime must score BULL (\u2265 5.0 of 9.5). CAUTION / BEAR = hold existing positions only, no new entries.",
         "status": "blocked",
-        "detail": "CAUTION (score +1)"
+        "detail": "CAUTION (score +4.5)"
       },
       {
         "key": "window",
@@ -2586,7 +2598,7 @@
     "note": null
   },
   "funnel": {
-    "date": "2026-11-04",
+    "date": "2026-11-05",
     "regime": "CAUTION",
     "stages": [
       {
@@ -2787,69 +2799,69 @@
     },
     "regime_detail": {
       "regime": "CAUTION",
-      "score": 1.0,
+      "score": 4.5,
       "max_score": 9.5,
       "factors": {
         "spx_vs_200sma": {
           "value": 1,
           "weight": 2.0,
           "contribution": 2.0,
-          "detail": "SPX 7,569 vs 200d SMA 7,316 (+3.5%)"
+          "detail": "SPX 7,689 vs 200d SMA 7,320 (+5.0%)"
         },
         "spx_vs_50sma": {
-          "value": -1,
+          "value": 0,
           "weight": 1.5,
-          "contribution": -1.5,
-          "detail": "SPX 7,569 vs 50d SMA 7,693 (-1.6%)"
+          "contribution": 0.0,
+          "detail": "SPX 7,689 vs 50d SMA 7,693 (-0.1%)"
         },
         "spx_20d_trend": {
           "value": -1,
           "weight": 1.0,
           "contribution": -1.0,
-          "detail": "20d slope -0.14%/day"
+          "detail": "20d slope -0.12%/day"
         },
         "ndx_vs_200sma": {
           "value": 0,
           "weight": 1.0,
           "contribution": 0.0,
-          "detail": "NDX 28,180 vs 200d SMA 27,953 (+0.8%)"
+          "detail": "NDX 28,437 vs 200d SMA 27,970 (+1.7%)"
         },
         "spx_52wk_pos": {
           "value": 1,
           "weight": 1.0,
           "contribution": 1.0,
-          "detail": "SPX at 83th pct of 52w range"
+          "detail": "SPX at 91th pct of 52w range"
         },
         "breadth": {
-          "value": 0,
+          "value": 1,
           "weight": 1.5,
-          "contribution": 0.0,
-          "detail": "57% of basket > 50d SMA"
+          "contribution": 1.5,
+          "detail": "67% of basket > 50d SMA"
         },
         "realized_vol": {
           "value": 1,
           "weight": 1.0,
           "contribution": 1.0,
-          "detail": "realized vol 11.4% annualised"
+          "detail": "realized vol 12.9% annualised"
         },
         "spx_5d_mom": {
-          "value": -1,
+          "value": 0,
           "weight": 0.5,
-          "contribution": -0.5,
-          "detail": "SPX 5d -2.0%"
+          "contribution": 0.0,
+          "detail": "SPX 5d -0.7%"
         }
       },
       "metrics": {
-        "spx_close": 7568.919922,
-        "spx_sma200": 7315.886362,
-        "spx_sma50": 7692.742627,
-        "spx_slope_norm": -0.001382,
-        "spx_52w_pos": 0.830526,
-        "spx_realized_vol": 0.113664,
-        "spx_5d_mom": -0.0199,
-        "ndx_close": 28180.259766,
-        "ndx_sma200": 27952.769307,
-        "breadth_pct": 0.571429,
+        "spx_close": 7688.620117,
+        "spx_sma200": 7320.345164,
+        "spx_sma50": 7692.969434,
+        "spx_slope_norm": -0.001218,
+        "spx_52w_pos": 0.911667,
+        "spx_realized_vol": 0.12915,
+        "spx_5d_mom": -0.007149,
+        "ndx_close": 28437.169922,
+        "ndx_sma200": 27970.017305,
+        "breadth_pct": 0.666667,
         "slope_flat_threshold": 0.0005
       },
       "thresholds": {
@@ -2861,7 +2873,7 @@
     "breaker": "OK",
     "window_open": true,
     "underwater": {
-      "count": 6,
+      "count": 5,
       "max": null,
       "throttled": false
     },
