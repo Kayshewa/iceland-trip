@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-19T00:07:09+00:00",
+  "generated_at": "2026-11-20T00:04:23+00:00",
   "status": {
     "mode": "PAPER",
     "regime": "BEAR",
     "position_count": 6,
     "max_positions": 12,
     "deployed_pct": 27,
-    "last_run_date": "2026-11-18",
-    "sessions": 90
+    "last_run_date": "2026-11-19",
+    "sessions": 91
   },
   "performance": {
     "forward": {
@@ -103,7 +103,8 @@
         "2026-11-13",
         "2026-11-16",
         "2026-11-17",
-        "2026-11-18"
+        "2026-11-18",
+        "2026-11-19"
       ],
       "strategy": [
         100.0,
@@ -195,7 +196,8 @@
         95.96,
         95.24,
         94.88,
-        94.68
+        94.68,
+        94.83
       ],
       "realized": [
         100.0,
@@ -287,103 +289,105 @@
         103.52,
         103.52,
         103.52,
+        103.52,
         103.52
       ],
       "benchmark": [
         100.0,
-        99.95,
-        101.13,
-        101.93,
-        101.71,
-        101.71,
-        102.45,
-        101.99,
-        101.7,
-        102.53,
-        102.96,
-        102.15,
-        102.53,
-        102.92,
-        101.36,
-        101.17,
-        102.06,
-        101.92,
-        100.69,
-        100.74,
-        101.8,
-        103.3,
-        105.15,
-        104.98,
-        104.79,
-        105.44,
-        105.38,
-        105.04,
-        105.27,
-        104.54,
-        104.76,
-        104.01,
-        104.35,
-        105.08,
-        104.82,
-        104.47,
-        103.72,
-        104.2,
-        105.3,
-        104.91,
-        104.3,
-        103.18,
-        104.07,
-        103.57,
-        103.1,
-        102.64,
-        103.81,
-        103.98,
-        105.53,
-        105.53,
-        104.74,
-        105.25,
-        104.43,
-        104.26,
-        104.0,
-        104.2,
-        104.96,
-        105.66,
-        106.27,
-        106.04,
-        105.54,
-        106.17,
-        106.11,
-        106.09,
-        104.91,
-        105.25,
-        104.1,
-        104.53,
-        104.83,
-        105.43,
-        104.16,
-        103.62,
-        104.34,
-        104.96,
-        105.25,
-        104.93,
-        103.03,
-        102.5,
-        102.87,
-        104.5,
-        99.95,
-        100.26,
-        102.62,
-        102.22,
-        103.56,
-        103.19,
-        102.78,
-        100.8,
-        99.77,
-        99.54
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0,
+        100.0
       ],
-      "strategy_return": -0.0532,
+      "strategy_return": -0.0517,
       "realized_return": 0.0352,
-      "benchmark_return": -0.0046
+      "benchmark_return": 0.0
     },
     "backtest": {
       "view": "backtest",
@@ -2444,7 +2448,7 @@
     }
   ],
   "regime": {
-    "date": "2026-11-18",
+    "date": "2026-11-19",
     "weights": {
       "spx_vs_200sma": 2.0,
       "spx_vs_50sma": 1.5,
@@ -2463,31 +2467,31 @@
         "value": 0,
         "weight": 2.0,
         "contribution": 0.0,
-        "detail": "SPX 7,341 vs 200d SMA 7,345 (-0.1%)"
+        "detail": "SPX 7,324 vs 200d SMA 7,347 (-0.3%)"
       },
       "spx_vs_50sma": {
         "value": -1,
         "weight": 1.5,
         "contribution": -1.5,
-        "detail": "SPX 7,341 vs 50d SMA 7,655 (-4.1%)"
+        "detail": "SPX 7,324 vs 50d SMA 7,649 (-4.2%)"
       },
       "spx_20d_trend": {
         "value": -1,
         "weight": 1.0,
         "contribution": -1.0,
-        "detail": "20d slope -0.20%/day"
+        "detail": "20d slope -0.21%/day"
       },
       "ndx_vs_200sma": {
         "value": -1,
         "weight": 1.0,
         "contribution": -1.0,
-        "detail": "NDX 27,002 vs 200d SMA 28,054 (-3.8%)"
+        "detail": "NDX 27,116 vs 200d SMA 28,063 (-3.4%)"
       },
       "spx_52wk_pos": {
         "value": 1,
         "weight": 1.0,
         "contribution": 1.0,
-        "detail": "SPX at 68th pct of 52w range"
+        "detail": "SPX at 66th pct of 52w range"
       },
       "breadth": {
         "value": 0,
@@ -2499,25 +2503,25 @@
         "value": 0,
         "weight": 1.0,
         "contribution": 0.0,
-        "detail": "realized vol 23.1% annualised"
+        "detail": "realized vol 22.9% annualised"
       },
       "spx_5d_mom": {
         "value": -1,
         "weight": 0.5,
         "contribution": -0.5,
-        "detail": "SPX 5d -2.4%"
+        "detail": "SPX 5d -3.9%"
       }
     },
     "metrics": {
-      "spx_close": 7340.529785,
-      "spx_sma200": 7344.525713,
-      "spx_sma50": 7654.760205,
-      "spx_slope_norm": -0.001977,
-      "spx_52w_pos": 0.675707,
-      "spx_realized_vol": 0.231309,
-      "spx_5d_mom": -0.023986,
-      "ndx_close": 27001.779297,
-      "ndx_sma200": 28053.881748,
+      "spx_close": 7323.629883,
+      "spx_sma200": 7346.554812,
+      "spx_sma50": 7648.505605,
+      "spx_slope_norm": -0.002101,
+      "spx_52w_pos": 0.664251,
+      "spx_realized_vol": 0.229261,
+      "spx_5d_mom": -0.038815,
+      "ndx_close": 27116.259766,
+      "ndx_sma200": 28062.769951,
       "breadth_pct": 0.547619,
       "slope_flat_threshold": 0.0005
     },
@@ -2527,7 +2531,7 @@
     }
   },
   "gates": {
-    "date": "2026-11-18",
+    "date": "2026-11-19",
     "entries_open": false,
     "blocking_gate": "Bull regime",
     "portfolio_gates": [
@@ -2634,7 +2638,7 @@
     "note": null
   },
   "funnel": {
-    "date": "2026-11-18",
+    "date": "2026-11-19",
     "regime": "BEAR",
     "stages": [
       {
@@ -2846,31 +2850,31 @@
           "value": 0,
           "weight": 2.0,
           "contribution": 0.0,
-          "detail": "SPX 7,341 vs 200d SMA 7,345 (-0.1%)"
+          "detail": "SPX 7,324 vs 200d SMA 7,347 (-0.3%)"
         },
         "spx_vs_50sma": {
           "value": -1,
           "weight": 1.5,
           "contribution": -1.5,
-          "detail": "SPX 7,341 vs 50d SMA 7,655 (-4.1%)"
+          "detail": "SPX 7,324 vs 50d SMA 7,649 (-4.2%)"
         },
         "spx_20d_trend": {
           "value": -1,
           "weight": 1.0,
           "contribution": -1.0,
-          "detail": "20d slope -0.20%/day"
+          "detail": "20d slope -0.21%/day"
         },
         "ndx_vs_200sma": {
           "value": -1,
           "weight": 1.0,
           "contribution": -1.0,
-          "detail": "NDX 27,002 vs 200d SMA 28,054 (-3.8%)"
+          "detail": "NDX 27,116 vs 200d SMA 28,063 (-3.4%)"
         },
         "spx_52wk_pos": {
           "value": 1,
           "weight": 1.0,
           "contribution": 1.0,
-          "detail": "SPX at 68th pct of 52w range"
+          "detail": "SPX at 66th pct of 52w range"
         },
         "breadth": {
           "value": 0,
@@ -2882,25 +2886,25 @@
           "value": 0,
           "weight": 1.0,
           "contribution": 0.0,
-          "detail": "realized vol 23.1% annualised"
+          "detail": "realized vol 22.9% annualised"
         },
         "spx_5d_mom": {
           "value": -1,
           "weight": 0.5,
           "contribution": -0.5,
-          "detail": "SPX 5d -2.4%"
+          "detail": "SPX 5d -3.9%"
         }
       },
       "metrics": {
-        "spx_close": 7340.529785,
-        "spx_sma200": 7344.525713,
-        "spx_sma50": 7654.760205,
-        "spx_slope_norm": -0.001977,
-        "spx_52w_pos": 0.675707,
-        "spx_realized_vol": 0.231309,
-        "spx_5d_mom": -0.023986,
-        "ndx_close": 27001.779297,
-        "ndx_sma200": 28053.881748,
+        "spx_close": 7323.629883,
+        "spx_sma200": 7346.554812,
+        "spx_sma50": 7648.505605,
+        "spx_slope_norm": -0.002101,
+        "spx_52w_pos": 0.664251,
+        "spx_realized_vol": 0.229261,
+        "spx_5d_mom": -0.038815,
+        "ndx_close": 27116.259766,
+        "ndx_sma200": 28062.769951,
         "breadth_pct": 0.547619,
         "slope_flat_threshold": 0.0005
       },
